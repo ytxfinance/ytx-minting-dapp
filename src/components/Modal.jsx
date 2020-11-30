@@ -6,17 +6,17 @@ export const Modal = ({
     modalState,
     children
 }) => {
-    const modalRef = useRef();
+    const modalRef                      = useRef();
     const [isModalOpen, setIsModalOpen] = modalState;
 
     useEffect(() => {
         const listener = (event) => {
-            if(!modalRef.current || modalRef.current.contains(event.target)){
+            if (!modalRef.current || modalRef.current.contains(event.target)) {
                 return;
             } else {
                 setIsModalOpen(false);
             }
-        }
+        };
 
         document.addEventListener('mousedown', listener);
         document.addEventListener('touchstart', listener);
@@ -27,13 +27,13 @@ export const Modal = ({
         };
     }, [modalRef, isModalOpen, setIsModalOpen]);
     
-     return (
-            <ModalDiv show={isModalOpen} ref={modalRef}>
-                {children}
-                <Button onClick={() => setIsModalOpen(false)} margin='auto 0 0 auto'>Close</Button>
-            </ModalDiv>
-        )
-}
+    return (
+        <ModalDiv show={isModalOpen} ref={modalRef}>
+            {children}
+            <Button onClick={() => setIsModalOpen(false)} margin='auto 0 0 auto'>Close</Button>
+        </ModalDiv>
+    );
+};
 
 const ModalDiv = styled.div`
     z-index: 99;
@@ -47,4 +47,4 @@ const ModalDiv = styled.div`
     height: 250px;
     border: 2px solid black;
     background-color: white;
-`
+`;

@@ -7,9 +7,9 @@ export const Card = ({
     return (
         <CardContainer>
             <CardImage src={img}/>
-		</CardContainer>
-    )
-}
+        </CardContainer>
+    );
+};
 
 const CardContainer = styled.div`
     width: 90px;
@@ -19,12 +19,12 @@ const CardContainer = styled.div`
     position: relative;
     bottom: 0;
     display: inline-block;
-`
-const CardImage = styled.img`
+`;
+const CardImage     = styled.img`
     position:absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     z-index:0;
-`
+`;

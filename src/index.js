@@ -5,28 +5,28 @@ import './index.css';
 import  { Home }  from './pages/Home';
 import { CardStoreProvider }  from './store';
 
-function App() {
-  return (
-    <div>
-		<Switch>
-			<Route
-				path='/'
-				exact
-				component={Home}
-			/>
-			<Route render={() => (
-				<h1>Default 404 page</h1>
-			)}/>
-		</Switch>
-    </div>
-  );
+function App () {
+    return (
+        <div>
+            <Switch>
+                <Route
+                    path='/'
+                    exact
+                    component={Home}
+                />
+                <Route render={() => (
+                    <h1>Default 404 page</h1>
+                )}/>
+            </Switch>
+        </div>
+    );
 }
 
 ReactDOM.render(
-	<CardStoreProvider>
-	<BrowserRouter>
+    <CardStoreProvider>
+        <BrowserRouter>
       		<App/>
-    </BrowserRouter>
-	</CardStoreProvider>,
-  document.getElementById('root')
+        </BrowserRouter>
+    </CardStoreProvider>,
+    document.getElementById('root')
 );

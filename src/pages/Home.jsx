@@ -3,7 +3,7 @@ import { cardStore } from '../store';
 import { Card, Modal, Header, Button } from '../components';
 
 export const Home = () => {
-    const { cards } = useContext(cardStore);
+    const { cards }                     = useContext(cardStore);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
@@ -17,14 +17,14 @@ export const Home = () => {
             <div className='cardContainer'>
                 {cards.map( card => {
                     return <div>
-                                <h2 >{card.title}</h2>
-                                {card.isAvalible && <h3>Avalible</h3>}
-                                <Card
-                                    title={card.title}
-                                    img={card.img}
-                                    isAvalible={card.isAvalible}
-                                />
-                            </div>
+                        <h2 >{card.title}</h2>
+                        {card.isAvalible && <h3>Avalible</h3>}
+                        <Card
+                            title={card.title}
+                            img={card.img}
+                            isAvalible={card.isAvalible}
+                        />
+                    </div>;
                 })}
             </div>
             <Modal modalState={[isModalOpen, setIsModalOpen]}>
@@ -36,5 +36,5 @@ export const Home = () => {
                 
             </Modal>
         </div>
-    )
-}   
+    );
+};   

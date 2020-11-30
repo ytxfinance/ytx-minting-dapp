@@ -10,8 +10,8 @@ export const Button = ({
         <StyledButton onClick={onClick} margin={margin}>
             {children}
         </StyledButton>
-    )
-}
+    );
+};
 
 const StyledButton = styled.button`
     text-decoration: none;
@@ -19,4 +19,4 @@ const StyledButton = styled.button`
     padding: 10px;
     text-align: center;
     margin: ${({margin}) => margin};
-`
+`;
