@@ -27,7 +27,14 @@ export const Home = () => {
                             </div>
                 })}
             </div>
-            <Modal modalState={[isModalOpen, setIsModalOpen]}/>
+            <Modal modalState={[isModalOpen, setIsModalOpen]}>
+                <h1>Stake YTX</h1>
+                <div>
+                    <input style={{margin: '30px auto'}}/>
+                    <input type='submit' value='Stake'/>
+                </div>
+                
+            </Modal>
         </div>
     )
 }   

@@ -30,19 +30,21 @@ export const Modal = ({
      return (
             <ModalDiv show={isModalOpen} ref={modalRef}>
                 {children}
-                <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+                <Button onClick={() => setIsModalOpen(false)} margin='auto 0 0 auto'>Close</Button>
             </ModalDiv>
         )
 }
 
 const ModalDiv = styled.div`
     z-index: 99;
-    display: ${props => props.show ? '' : 'none'};
+    display: ${props => props.show ? 'flex' : 'none'};
+    padding: 20px;
+    flex-direction: column;
     position: absolute;
     left: calc(50% - 250px);
     top: calc(50% - 250px);
     width: 250px;
     height: 250px;
-    background-color: red;
-    border-color: black;
+    border: 2px solid black;
+    background-color: white;
 `
