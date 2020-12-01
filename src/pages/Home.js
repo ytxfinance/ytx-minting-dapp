@@ -15,9 +15,9 @@ export const Home = () => {
 				</Button>
 			</Header>
 			<div className="cardContainer">
-				{cards.map((card) => {
+				{cards.map((card, i) => {
 					return (
-						<div>
+						<div key={i}>
 							<h2>{card.title}</h2>
 							{card.isAvalible && <h3>Avalible</h3>}
 							<Card

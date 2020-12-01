@@ -9,8 +9,8 @@ function App() {
 	return (
 		<div>
 			<Switch>
-				<Route path="/" exact component={Home} />
-				<Route render={() => <h1>Default 404 page</h1>} />
+				{/* <Route render={() => <h1>Default 404 page</h1>} /> */}
+				<Route path="/" component={Home} />
 			</Switch>
 		</div>
 	)
