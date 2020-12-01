@@ -6,10 +6,10 @@ module.exports = {
     devtool: process.env.NODE_ENV === 'production' ? '' : 'eval-source-map',
     entry: [
         '@babel/polyfill',
-        path.join(__dirname, 'src', 'client', 'App.js')
+        path.join(__dirname, 'src', 'index.js')
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'docs'),
         filename: 'build.js'
     },
     module: {
@@ -30,12 +30,20 @@ module.exports = {
                 }
             }, 'stylus-loader'],
             include: /src/
+        }, {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: ['style-loader', 'css-loader'],
+            include: /src/
+        }, {
+            test: /\.(jpe?g|png|gif|svg)$/i, 
+            loader: "file-loader?name=/public/icons/[name].[ext]"
         }]
     },
     plugins: [
         new htmlPlugin({
             title: "Decentralized card game",
-            template: './src/client/index.ejs',
+            template: './src/index.ejs',
             hash: true
         }),
     ]
