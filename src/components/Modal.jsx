@@ -40,11 +40,12 @@ const ModalDiv = styled.div`
     display: ${props => props.show ? 'flex' : 'none'};
     padding: 20px;
     flex-direction: column;
-    position: absolute;
-    left: calc(50% - 250px);
-    top: calc(50% - 250px);
-    width: 250px;
-    height: 250px;
+    position: fixed;
+    left: calc(50% - 200px);
+    top: calc(50% - 200px);
+    width: 400px;
+    height: 400px;
     border: 2px solid black;
+    border-radius: 8px;
     background-color: white;
 `;
