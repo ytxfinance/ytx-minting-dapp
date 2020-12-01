@@ -50,7 +50,7 @@ export const Home = () => {
                 <ButtonsContainer>
                     {account ? <h2>Connected</h2> :
                         <Button onClick={() => setup(dispatch)} isLoading={isLoading} disabled={isLoading} margin='0 20px 0 0'>
-                            Connect Mask
+                            Unlock MetaMask
                         </Button>
                     }
                     <Button onClick={() => setIsStakeModalOpen(true)}  margin='0 20px 0'>
