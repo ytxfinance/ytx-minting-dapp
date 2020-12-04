@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# ytx-minting-dapp
-
-# Built with React
-=======
 ## General Specification
 - Each user has 100 life points and an initial 10 energy points.
 - Energy points are used to deploy new cards.
@@ -53,4 +48,3 @@ Each card has the following attributes:
     type: 'fire' | 'water' | 'wind' | 'life' | 'death' | 'neutral',
 }
 ```
->>>>>>> 8443e7ffa3d56cebf362c950fa54db729d0bbafc
