@@ -31,10 +31,6 @@
             "error",
             "single"
         ],
-        "semi": [
-            "error",
-            "always"
-        ],
         "no-var":"error",
         "key-spacing":[
             2,{"align": {
