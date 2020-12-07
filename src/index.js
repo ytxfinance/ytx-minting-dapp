@@ -7,12 +7,10 @@ import { CardStoreProvider } from './store'
 
 function App() {
 	return (
-		<div>
-			<Switch>
-				{/* <Route render={() => <h1>Default 404 page</h1>} /> */}
-				<Route path="/" component={Home} />
-			</Switch>
-		</div>
+		<Switch>
+			{/* <Route render={() => <h1>Default 404 page</h1>} /> */}
+			<Route path="/" component={Home} />
+		</Switch>
 	)
 }
 

@@ -7,7 +7,7 @@ export const Home = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
-		<div style={{ width: '100%', height: '100%' }}>
+		<>
 			<Header>
 				<h1 style={{ margin: 'auto 0 auto 50px' }}>YTX Minting</h1>
 				<Button onClick={() => setIsModalOpen(true)} margin="10px 20px">
@@ -36,6 +36,6 @@ export const Home = () => {
 					<input type="submit" value="Stake" />
 				</div>
 			</Modal>
-		</div>
+		</>
 	)
 }
