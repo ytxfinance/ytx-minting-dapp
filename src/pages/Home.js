@@ -10,7 +10,7 @@ import Popover from 'react-bootstrap/Popover'
 import { cardStore } from '../store'
 import { Card, Modal, Header } from '../components'
 import Logo from '../assets/logo.png'
-import Git from '../assets/git.png'
+import Git from '../assets/social/github.png'
 import styled from 'styled-components'
 import { Col, Row } from 'react-bootstrap'
 
@@ -21,20 +21,20 @@ export const Home = () => {
 	return (
 		<>
 			<StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-				<Navbar.Brand href="#home">
+				<StyledBrand href="#home">
 					<img
 						src={Logo}
-						width="48"
-						height="48"
+						width="49"
+						height="49"
 						className="d-inline-block align-top"
 						alt="YTX logo"
 					/>
-				</Navbar.Brand>
+				</StyledBrand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto">
 						<StyledLink href="#home">Home</StyledLink>
-						<StyledLink href="#minting-app">
+						<StyledLink href="#minting-app" active="true">
 							NFT Minting App
 						</StyledLink>
 						<StyledLink href="#card-game">YTX Card Game</StyledLink>
@@ -112,12 +112,10 @@ export const Home = () => {
 						{cards.map((card, i) => {
 							return (
 								<StyledCol key={i} xs={6} md={4}>
-									<h2>{card.title}</h2>
+									{/* <h2>{card.title}</h2> */}
 									{/* {card.isAvalible && <h3>Avalible</h3>} */}
 									<Card
-										title={card.title}
-										img={card.img}
-										isAvalible={card.isAvalible}
+										card={card}
 									/>
 								</StyledCol>
 							)
@@ -151,22 +149,33 @@ export const Home = () => {
 	)
 }
 
+const StyledBrand = styled(Navbar.Brand)`
+	margin-right: 38px;
+`
 const StyledNavbar = styled(Navbar)`
-	background-color: #343434 !important;
+	background: #343434 0% 0% no-repeat padding-box !important;
+	padding: .5rem 36px !important;
+	height: 71px;
+	opacity: 1;
 `
 const WalletButton = styled(Button)`
-	color: rgba(255, 255, 255, 0.5);
-	border-color: #c57132;
-	background-color: #493d34;
+	color: rgba(255, 255, 255, 0.8);
+	background: #FF8A321A 0% 0% no-repeat padding-box;
+	border: 1px solid #FF8A32;
+	border-radius: 9px;
 
 	&:hover {
 		color: #212529;
-		background-color: #c57132;
-		border-color: #c57132;
+		background-color: #FF8A32;
+		border-color: #FF8A32;
 	}
 `
 const StyledLink = styled(Nav.Link)`
-	margin-right: 1rem;
+	margin-right: 1.5rem;
+	font: ${props => (props.active ? "normal normal bold 16px/19px Montserrat" : "normal normal normal 16px/19px Montserrat")};
+	letter-spacing: 0px;
+	color: #FFFFFF !important;
+	opacity: 1;
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;

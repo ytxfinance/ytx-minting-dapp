@@ -1,6 +1,6 @@
-import eleven from '../assets/eleven.png'
-import five from '../assets/five.png'
-import ten from '../assets/ten.png'
+import eleven from '../assets/cards/eleven.png'
+import five from '../assets/cards/five.png'
+import ten from '../assets/cards/ten.png'
 
 export const ACTION_TYPES = {
 	INITIALIZE_CARDS: 'INITIALIZE_CARDS',

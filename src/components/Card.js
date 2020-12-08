@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Card = ({ img }) => {
+export const Card = (card) => {
+	const {title, img, isAvalible, minted, left, requiredYTX, requiredYFS} = card;
+	
 	return (
 		<CardContainer>
 			<CardImage src={img} />
