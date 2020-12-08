@@ -81,7 +81,7 @@ export const Home = () => {
 					Stake YTX
 				</Button>
 			</Header> */}
-			<StyeldContainer fluid>
+			<StyeldContainer >
 				<CardHeader>
 					<Title>XYZ Collection</Title>
 					<OverlayTrigger
@@ -111,15 +111,15 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<Col key={i} xs={6} md={4}>
+								<StyledCol key={i} xs={6} md={4}>
 									<h2>{card.title}</h2>
-									{card.isAvalible && <h3>Avalible</h3>}
+									{/* {card.isAvalible && <h3>Avalible</h3>} */}
 									<Card
 										title={card.title}
 										img={card.img}
 										isAvalible={card.isAvalible}
 									/>
-								</Col>
+								</StyledCol>
 							)
 						})}
 					</Row>
@@ -170,7 +170,6 @@ const StyledLink = styled(Nav.Link)`
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
-	padding: 4rem 6rem 4rem;
 `
 const CardPanel = styled.div`
 	border-radius: 1rem;
@@ -180,9 +179,10 @@ const CardPanel = styled.div`
 const CardHeader = styled.div`
 	background-color: #535353;
 	border-radius: 1rem;
+	box-shadow: 0 .225rem .75rem rgba(0,0,0,.3);
 	position: relative;
 	padding: 0.8rem;
-	margin: 0 6rem -1.9rem;
+	margin: 4rem 6rem -1.9rem;
 	z-index: 5;
 `
 const Title = styled.div`
@@ -199,4 +199,7 @@ const Tooltip = styled.img`
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
+`
+const StyledCol = styled(Col)`
+	text-align: center;
 `
