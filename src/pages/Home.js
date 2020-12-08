@@ -4,13 +4,18 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Overlay from 'react-bootstrap/Overlay'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import { cardStore } from '../store'
 import { Card, Modal, Header } from '../components'
-import Logo from '../assets/logo.png'
-import Git from '../assets/social/github.png'
+import {
+	Logo,
+	DiscordIcon,
+	GitHubIcon,
+	WhitepaperIcon,
+	ScrollTopIcon,
+	TooltipIcon,
+} from '../components/Icons'
 import styled from 'styled-components'
 import { Col, Row } from 'react-bootstrap'
 
@@ -42,27 +47,27 @@ export const Home = () => {
 					<Nav>
 						<StyledLink href="#discord">
 							<img
-								src={Git}
-								width="25"
-								height="25"
+								src={DiscordIcon}
+								width="30"
+								height="30"
 								className="d-inline-block align-top"
 								alt="YTX logo"
 							/>
 						</StyledLink>
 						<StyledLink href="#git">
 							<img
-								src={Git}
-								width="25"
-								height="25"
+								src={GitHubIcon}
+								width="30"
+								height="30"
 								className="d-inline-block align-top"
 								alt="YTX logo"
 							/>
 						</StyledLink>
 						<StyledLink href="#whitepaper">
 							<img
-								src={Git}
-								width="25"
-								height="25"
+								src={WhitepaperIcon}
+								width="30"
+								height="30"
 								className="d-inline-block align-top"
 								alt="YTX logo"
 							/>
@@ -81,7 +86,7 @@ export const Home = () => {
 					Stake YTX
 				</Button>
 			</Header> */}
-			<StyeldContainer >
+			<StyeldContainer fluid>
 				<CardHeader>
 					<Title>XYZ Collection</Title>
 					<OverlayTrigger
@@ -99,9 +104,9 @@ export const Home = () => {
 						}
 					>
 						<Tooltip
-							src={Git}
-							width="25"
-							height="25"
+							src={TooltipIcon}
+							width="27"
+							height="27"
 							className="d-inline-block align-top"
 							alt="YTX logo"
 						/>
@@ -114,9 +119,7 @@ export const Home = () => {
 								<StyledCol key={i} xs={6} md={4}>
 									{/* <h2>{card.title}</h2> */}
 									{/* {card.isAvalible && <h3>Avalible</h3>} */}
-									<Card
-										card={card}
-									/>
+									<Card card={card} />
 								</StyledCol>
 							)
 						})}
@@ -154,43 +157,47 @@ const StyledBrand = styled(Navbar.Brand)`
 `
 const StyledNavbar = styled(Navbar)`
 	background: #343434 0% 0% no-repeat padding-box !important;
-	padding: .5rem 36px !important;
+	padding: 0.5rem 36px !important;
 	height: 71px;
 	opacity: 1;
 `
 const WalletButton = styled(Button)`
 	color: rgba(255, 255, 255, 0.8);
-	background: #FF8A321A 0% 0% no-repeat padding-box;
-	border: 1px solid #FF8A32;
+	background: #ff8a321a 0% 0% no-repeat padding-box;
+	border: 1px solid #ff8a32;
 	border-radius: 9px;
 
 	&:hover {
 		color: #212529;
-		background-color: #FF8A32;
-		border-color: #FF8A32;
+		background-color: #ff8a32;
+		border-color: #ff8a32;
 	}
 `
 const StyledLink = styled(Nav.Link)`
 	margin-right: 1.5rem;
-	font: ${props => (props.active ? "normal normal bold 16px/19px Montserrat" : "normal normal normal 16px/19px Montserrat")};
+	font: ${(props) =>
+		props.active
+			? 'normal normal bold 16px/19px Montserrat'
+			: 'normal normal normal 16px/19px Montserrat'};
 	letter-spacing: 0px;
-	color: #FFFFFF !important;
+	color: #ffffff !important;
 	opacity: 1;
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
+	padding: 0 15%;
 `
 const CardPanel = styled.div`
-	border-radius: 1rem;
-	background-color: #1f1f1f;
+	background: #1f1f1f 0% 0% no-repeat padding-box;
+	border-radius: 20px;
 	padding: 4rem 5rem 2rem;
 `
 const CardHeader = styled.div`
-	background-color: #535353;
-	border-radius: 1rem;
-	box-shadow: 0 .225rem .75rem rgba(0,0,0,.3);
+	background: #535353 0% 0% no-repeat padding-box;
+	box-shadow: 0px 5px 12px #0000004b;
+	border-radius: 20px;
 	position: relative;
-	padding: 0.8rem;
+    padding: 18px;
 	margin: 4rem 6rem -1.9rem;
 	z-index: 5;
 `
@@ -198,11 +205,10 @@ const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font: normal normal bold 24px/29px Montserrat;
+	letter-spacing: 4.8px;
+	color: #FFFFFF;
 	text-transform: uppercase;
-	font-size: 1.4rem;
-	letter-spacing: 0.3rem;
-	font-weight: 500;
-	color: white;
 `
 const Tooltip = styled.img`
 	position: absolute;
