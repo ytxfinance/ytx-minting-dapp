@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -6,7 +7,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
-import { cardStore } from '../store'
+import { Col, Row } from 'react-bootstrap'
+import { cardStore, device } from '../store'
 import { Card, Modal, Header } from '../components'
 import {
 	Logo,
@@ -16,8 +18,7 @@ import {
 	ScrollTopIcon,
 	TooltipIcon,
 } from '../components/Icons'
-import styled from 'styled-components'
-import { Col, Row } from 'react-bootstrap'
+
 
 export const Home = () => {
 	const { cards } = useContext(cardStore)
@@ -116,7 +117,7 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={6} md={4}>
+								<StyledCol key={i} xs={12} md={4} sm={6}>
 									{/* <h2>{card.title}</h2> */}
 									{/* {card.isAvalible && <h3>Avalible</h3>} */}
 									<Card card={card} />
@@ -194,13 +195,19 @@ const StyledLink = styled(Nav.Link)`
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
-	padding: 0 10%;
+	padding: 0 5%;
 	padding-bottom: 80px;
+	@media ${device.mobileL} {
+		padding: 0 10%;
+	}
 `
 const CardPanel = styled.div`
 	background: #1f1f1f 0% 0% no-repeat padding-box;
 	border-radius: 20px;
-	padding: 5rem 5rem 2rem;
+	padding: 4rem 5rem 2rem;
+	@media ${device.tablet} {
+		padding: 5rem 5rem 2rem;
+	}
 `
 const CardHeader = styled.div`
 	background: #535353 0% 0% no-repeat padding-box;
@@ -208,17 +215,41 @@ const CardHeader = styled.div`
 	border-radius: 20px;
 	position: relative;
 	padding: 18px;
-	margin: 4rem 6rem -1.9rem;
+	margin: 1.2rem 1.2rem -1.9rem;
+	
+	img {
+		display: none !important;
+
+		@media ${device.mobileL} {
+			display: inline-block !important;
+		}
+	}
+	@media ${device.mobileL} {
+		margin: 4rem 6rem -1.9rem;
+	}
+	@media ${device.tablet} {
+		margin: 4rem 6rem -1.9rem;
+	}
+	@media ${device.laptop} {
+		margin: 4rem 6rem -1.9rem;
+	}
+	
 	z-index: 5;
 `
 const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font: normal normal bold 24px/29px Montserrat;
+	font: normal normal bold 16px/29px Montserrat;
 	letter-spacing: 4.8px;
 	color: #ffffff;
 	text-transform: uppercase;
+	@media ${device.tablet} {
+		font: normal normal bold 24px/29px Montserrat;
+	}
+	@media ${device.laptop} {
+		font: normal normal bold 24px/29px Montserrat;
+	}
 `
 const Tooltip = styled.img`
 	position: absolute;
