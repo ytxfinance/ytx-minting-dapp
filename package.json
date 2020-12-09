@@ -17,6 +17,7 @@
         "file-loader": "^6.2.0",
         "react-bootstrap": "^1.4.0",
         "react-router-dom": "^5.2.0",
+        "react-scroll-up-button": "^1.6.4",
         "styled-components": "^5.2.1",
         "web3": "^1.2.1"
     },

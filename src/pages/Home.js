@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import ScrollUpButton from 'react-scroll-up-button'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -18,7 +19,6 @@ import {
 	ScrollTopIcon,
 	TooltipIcon,
 } from '../components/Icons'
-
 
 export const Home = () => {
 	const { cards } = useContext(cardStore)
@@ -127,12 +127,15 @@ export const Home = () => {
 					</Row>
 				</CardPanel>
 			</StyeldContainer>
-			<ScrollTopButton
-				width="40"
-				height="40"
-				alt="ScrollTop"
-				src={ScrollTopIcon}
-			/>
+
+			<ScrollUpButton EasingType="easeInOutCubic" ShowAtPosition={3000}>
+				<ScrollTopButton
+					width="40"
+					height="40"
+					alt="ScrollTop"
+					src={ScrollTopIcon}
+				/>
+			</ScrollUpButton>
 			<StakeButton variant="outline-warning">
 				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
 			</StakeButton>
@@ -205,6 +208,7 @@ const CardPanel = styled.div`
 	background: #1f1f1f 0% 0% no-repeat padding-box;
 	border-radius: 20px;
 	padding: 4rem 5rem 2rem;
+
 	@media ${device.tablet} {
 		padding: 5rem 5rem 2rem;
 	}
@@ -216,7 +220,8 @@ const CardHeader = styled.div`
 	position: relative;
 	padding: 18px;
 	margin: 1.2rem 1.2rem -1.9rem;
-	
+	z-index: 5;
+
 	img {
 		display: none !important;
 
@@ -224,17 +229,18 @@ const CardHeader = styled.div`
 			display: inline-block !important;
 		}
 	}
+
 	@media ${device.mobileL} {
 		margin: 4rem 6rem -1.9rem;
 	}
+
 	@media ${device.tablet} {
 		margin: 4rem 6rem -1.9rem;
 	}
+
 	@media ${device.laptop} {
 		margin: 4rem 6rem -1.9rem;
 	}
-	
-	z-index: 5;
 `
 const Title = styled.div`
 	display: flex;
@@ -244,6 +250,7 @@ const Title = styled.div`
 	letter-spacing: 4.8px;
 	color: #ffffff;
 	text-transform: uppercase;
+
 	@media ${device.tablet} {
 		font: normal normal bold 24px/29px Montserrat;
 	}
@@ -263,23 +270,37 @@ const StyledCol = styled(Col)`
 const ScrollTopButton = styled.img`
 	position: fixed;
 	cursor: pointer;
-	bottom: 4rem;
-	left: 4rem;
+	bottom: 1rem;
+    left: 1rem;
+
+	@media ${device.mobileL} {
+		bottom: 4rem;
+		left: 4rem;
+	}
 `
 const StakeButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
 	border: none;
 	border-radius: 12px;
-
 	letter-spacing: 0.6px;
 	color: #3d2206;
 	padding: 12px 25px;
 	text-transform: uppercase;
 	position: fixed;
-	bottom: 4rem;
-	right: 4rem;
+	left: 50%;
+	width: 239px;
+	bottom: 2rem;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 
+	@media ${device.mobileL} {
+		bottom: 4rem;
+		left: unset;
+		right: 4rem;
+		-webkit-transform: translateX(0%);
+		transform: translateX(0%);
+	}
 	&:hover {
 		color: #212529;
 		background-color: #ff8a32;
