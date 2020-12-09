@@ -126,6 +126,15 @@ export const Home = () => {
 					</Row>
 				</CardPanel>
 			</StyeldContainer>
+			<ScrollTopButton
+				width="40"
+				height="40"
+				alt="ScrollTop"
+				src={ScrollTopIcon}
+			/>
+			<StakeButton variant="outline-warning">
+				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
+			</StakeButton>
 			{/* <div className="cardContainer">
 				{cards.map((card, i) => {
 					return (
@@ -170,7 +179,7 @@ const WalletButton = styled(Button)`
 	&:hover {
 		color: #212529;
 		background-color: #ff8a32;
-		border-color: #ff8a32;
+		border-color: transparent;
 	}
 `
 const StyledLink = styled(Nav.Link)`
@@ -185,19 +194,20 @@ const StyledLink = styled(Nav.Link)`
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
-	padding: 0 15%;
+	padding: 0 10%;
+	padding-bottom: 80px;
 `
 const CardPanel = styled.div`
 	background: #1f1f1f 0% 0% no-repeat padding-box;
 	border-radius: 20px;
-	padding: 4rem 5rem 2rem;
+	padding: 5rem 5rem 2rem;
 `
 const CardHeader = styled.div`
 	background: #535353 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
 	border-radius: 20px;
 	position: relative;
-    padding: 18px;
+	padding: 18px;
 	margin: 4rem 6rem -1.9rem;
 	z-index: 5;
 `
@@ -207,7 +217,7 @@ const Title = styled.div`
 	align-items: center;
 	font: normal normal bold 24px/29px Montserrat;
 	letter-spacing: 4.8px;
-	color: #FFFFFF;
+	color: #ffffff;
 	text-transform: uppercase;
 `
 const Tooltip = styled.img`
@@ -217,4 +227,37 @@ const Tooltip = styled.img`
 `
 const StyledCol = styled(Col)`
 	text-align: center;
+	margin-bottom: 4rem;
+`
+const ScrollTopButton = styled.img`
+	position: fixed;
+	cursor: pointer;
+	bottom: 4rem;
+	left: 4rem;
+`
+const StakeButton = styled(Button)`
+	background: #ff8a32 0% 0% no-repeat padding-box;
+	box-shadow: 0px 5px 12px #0000004b;
+	border: none;
+	border-radius: 12px;
+
+	letter-spacing: 0.6px;
+	color: #3d2206;
+	padding: 12px 25px;
+	text-transform: uppercase;
+	position: fixed;
+	bottom: 4rem;
+	right: 4rem;
+
+	&:hover {
+		color: #212529;
+		background-color: #ff8a32;
+		border-color: transparent;
+	}
+	span {
+		font: normal normal bold 12px/19px Montserrat;
+	}
+	strong {
+		font: normal normal bold 15px/19px Montserrat;
+	}
 `
