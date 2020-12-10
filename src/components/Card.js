@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from 'react-bootstrap/Button'
 import LabelBackImg from '../assets/label-back.png'
+import { device } from '../store'
 
 export const Card = ({ card }) => {
 	const {
@@ -49,12 +50,22 @@ const CardTitle = styled.div`
 	letter-spacing: 0px;
 	color: #ffffff;
 	margin-bottom: 20px;
+
+	@media ${device.desktop} {
+		font: normal normal 500 29px/35px Montserrat;
+	}
+
 `
 const ImageWrapper = styled.div`
 	position: relative;
 	width: 187px;
 	height: 312px;
 	margin: 0 auto;
+
+	@media ${device.desktop} {
+		width: 349px;
+		height: 582px;
+	}
 
 	.overlay {
 		position: absolute;
@@ -109,6 +120,11 @@ const CardImage = styled.img`
 	top: 0px;
 	border-radius: 6px;
 	z-index: 0;
+	
+	@media ${device.desktop} {
+		width: 349px;
+		height: 582px;
+	}
 `
 const ButtonGroup = styled.div`
 	width: 187px;
@@ -118,6 +134,12 @@ const ButtonGroup = styled.div`
 	z-index: 2;
 	border-radius: 17px;
 	background: linear-gradient(114deg, #ffffff 53%, #ff8a32 47%);
+	
+	@media ${device.desktop} {
+		width: 349px;
+		height: 50px;
+		margin: 23px auto 17px;
+	}
 `
 const MintedText = styled.span`
 	float: left;
