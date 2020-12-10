@@ -61,49 +61,52 @@ export const Home = () => {
 					/>
 				</StyledBrand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="mr-auto">
+				<StyledNavBarCollapse id="responsive-navbar-nav">
+					<StyledNav className="mr-auto">
 						<StyledLink href="#home">Home</StyledLink>
 						<StyledLink href="#minting-app" active="true">
 							NFT Minting App
 						</StyledLink>
 						<StyledLink href="#card-game">YTX Card Game</StyledLink>
-					</Nav>
-					<Nav>
-						<StyledLink href="https://discord.gg/pAYrSwR" target="_blank">
-							<img
-								src={DiscordIcon}
-								width="30"
-								height="30"
-								className="d-inline-block align-top"
-								alt="YTX logo"
-							/>
-						</StyledLink>
-						<StyledLink href="https://github.com/ytxfinance" target="_blank">
-							<img
-								src={GitHubIcon}
-								width="30"
-								height="30"
-								className="d-inline-block align-top"
-								alt="YTX logo"
-							/>
-						</StyledLink>
-						<StyledLink href="https://ytx.finance/assets/ytx-whitepaper.pdf" target="_blank">
-							<img
-								src={WhitepaperIcon}
-								width="30"
-								height="30"
-								className="d-inline-block align-top"
-								alt="YTX logo"
-							/>
-						</StyledLink>
+					</StyledNav>
+					<StyledNav>
+						<LinkWrapper>
+							<StyledLink href="https://discord.gg/pAYrSwR" target="_blank">
+								<img
+									src={DiscordIcon}
+									width="30"
+									height="30"
+									className="d-inline-block align-top"
+									alt="YTX logo"
+								/>
+							</StyledLink>
+							<StyledLink href="https://github.com/ytxfinance" target="_blank">
+								<img
+									src={GitHubIcon}
+									width="30"
+									height="30"
+									className="d-inline-block align-top"
+									alt="YTX logo"
+								/>
+							</StyledLink>
+							<StyledLink href="https://ytx.finance/assets/ytx-whitepaper.pdf" target="_blank">
+								<img
+									src={WhitepaperIcon}
+									width="30"
+									height="30"
+									className="d-inline-block align-top"
+									alt="YTX logo"
+								/>
+							</StyledLink>						
+						</LinkWrapper>
+
 						<Form inline>
 							<WalletButton variant="outline-warning">
 								Connect Wallet
 							</WalletButton>
 						</Form>
-					</Nav>
-				</Navbar.Collapse>
+					</StyledNav>
+				</StyledNavBarCollapse>
 			</StyledNavbar>
 			{/* <Header>
 				<h1 style={{ margin: 'auto 0 auto 50px' }}>YTX Minting</h1>
@@ -199,11 +202,29 @@ export const Home = () => {
 const StyledBrand = styled(Navbar.Brand)`
 	margin-right: 38px;
 `
+const StyledNavBarCollapse = styled(Navbar.Collapse)`
+	background: #000000;
+	opacity: 0.8;
+	text-align: center;
+	z-index: 100;
+	padding: 41% 10%;
+	@media ${device.tablet} {
+		background: unset;
+		opacity: 1;
+		text-align: center;
+		z-index: 100;
+		padding: unset;
+	}
+`
 const StyledNavbar = styled(Navbar)`
 	background: #343434 0% 0% no-repeat padding-box !important;
 	padding: 0.5rem 36px !important;
 	height: 71px;
 	opacity: 1;
+
+`
+const StyledNav = styled(Nav)`
+	align-items: center;
 `
 const WalletButton = styled(Button)`
 	color: rgba(255, 255, 255, 0.8);
@@ -217,8 +238,24 @@ const WalletButton = styled(Button)`
 		border-color: transparent;
 	}
 `
+const LinkWrapper = styled.div`
+	flex-direction: row;
+	display: flex;
+
+	a {
+		margin: 1.5rem;
+	}
+
+	@media ${device.tablet} {
+		a {
+			margin: unset;
+			margin-right: 1.5rem;
+		}
+	}
+
+`
 const StyledLink = styled(Nav.Link)`
-	margin-right: 1.5rem;
+
 	font: ${(props) =>
 		props.active
 			? 'normal normal bold 16px/19px Montserrat'
@@ -226,6 +263,11 @@ const StyledLink = styled(Nav.Link)`
 	letter-spacing: 0px;
 	color: #ffffff !important;
 	opacity: 1;
+	margin: 0.5rem;
+	@media ${device.tablet} {
+		margin: unset;
+		margin-right: 1.5rem;
+	}
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
