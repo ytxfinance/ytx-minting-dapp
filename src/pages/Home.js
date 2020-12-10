@@ -148,7 +148,7 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={12} xl={4} md={4} sm={6} className="col-xxl-3">
+								<StyledCol key={i} xs={12} xl={4} md={6} sm={6} className="col-xxl-3">
 									<Card card={card} />
 								</StyledCol>
 							)
@@ -251,7 +251,7 @@ const StyeldContainer = styled(Container)`
 	padding: 0 5%;
 	padding-bottom: 80px;
 	@media ${device.mobileL} {
-		padding: 0 10%;
+		padding: 0 10% 4%;
 	}
 `
 const CardPanel = styled.div`
@@ -317,7 +317,7 @@ const StyledCol = styled(Col)`
 	text-align: center;
 	margin-bottom: 4rem;
 
-	@media ${device.laptopL}  {
+	@media ${device.laptopXL}  {
 		&.col-xxl-3 {
 			flex: 0 0 25%;
 			max-width: 25%;
