@@ -111,6 +111,12 @@ const MintButton = styled(Button)`
 		background-color: #ff8a32;
 		border-color: transparent;
 	}
+
+	@media ${device.desktop} {
+		padding: 15px 38px;
+		font: normal normal 500 24px/29px Montserrat;
+		border-radius: 15px;
+	}
 `
 const CardImage = styled.img`
 	width: 187px;
@@ -144,37 +150,78 @@ const ButtonGroup = styled.div`
 const MintedText = styled.span`
 	float: left;
 	margin-left: 15px;
+
 	strong {
 		font: normal normal bold 11px/13px Montserrat;
 		letter-spacing: 1.1px;
 	}
+
 	span {
 		font: normal normal normal 10px/13px Montserrat;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+	}
+	
+	@media ${device.desktop} {
+		margin-left: 28px;
+		margin-top: 13px;
+		
+		strong {
+			font: normal normal bold 20px/22px Montserrat;
+			letter-spacing: 2px;
+		}
+
+		span {
+			font: normal normal normal 18px/22px Montserrat;
+			letter-spacing: 1.8px;
+		}
 	}
 `
 const LeftText = styled.span`
 	float: right;
 	margin-right: 15px;
+	color: #FFFFFF;
+
 	strong {
 		font: normal normal bold 11px/13px Montserrat;
 		letter-spacing: 1.1px;
 	}
+
 	span {
 		font: normal normal normal 10px/13px Montserrat;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+	}
+
+	@media ${device.desktop} {
+		margin-right: 28px;
+    	margin-top: 13px;
+		strong {
+			font: normal normal bold 20px/22px Montserrat;
+			letter-spacing: 2px;
+		}
+		span {
+			font: normal normal normal 18px/22px Montserrat;
+			letter-spacing: 1.8px;
+		}
 	}
 `
 const CardText = styled.div`
 	font: normal normal bold 14px/15px Montserrat;
 	letter-spacing: 0px;
 	color: #ffffff;
+
+	@media ${device.desktop} {
+		font: normal normal bold 27px/28px Montserrat;
+	}
 `
 const Subtitle = styled.div`
 	text-align: center;
 	font: normal normal 500 12px/15px Montserrat;
 	letter-spacing: 0px;
 	color: #ffffff;
+
+	@media ${device.desktop} {
+		font: normal normal 500 23px/28px Montserrat;
+	}
 `
