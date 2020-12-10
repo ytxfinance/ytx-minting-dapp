@@ -13,8 +13,7 @@ import { Col, Row } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 
 import { cardStore, device } from '../store'
-import { Card, Header } from '../components'
-
+import { Card } from '../components'
 import {
 	Logo,
 	DiscordIcon,
@@ -40,9 +39,11 @@ export const Home = () => {
 				<StyledHeader closeButton></StyledHeader>
 				<StyledBody>
 					<h4>Stake YTX</h4>
-					<input type="number" min="1"/>
+					<input type="number" min="1" />
 					<StakeButton variant="outline-warning">Stake</StakeButton>
-					<UnstakeButton variant="outline-warning">Unstake</UnstakeButton>
+					<UnstakeButton variant="outline-warning">
+						Unstake
+					</UnstakeButton>
 				</StyledBody>
 			</Modal>
 		)
@@ -71,7 +72,10 @@ export const Home = () => {
 					</StyledNav>
 					<StyledNav>
 						<LinkWrapper>
-							<StyledLink href="https://discord.gg/pAYrSwR" target="_blank">
+							<StyledLink
+								href="https://discord.gg/pAYrSwR"
+								target="_blank"
+							>
 								<img
 									src={DiscordIcon}
 									width="30"
@@ -80,7 +84,10 @@ export const Home = () => {
 									alt="YTX logo"
 								/>
 							</StyledLink>
-							<StyledLink href="https://github.com/ytxfinance" target="_blank">
+							<StyledLink
+								href="https://github.com/ytxfinance"
+								target="_blank"
+							>
 								<img
 									src={GitHubIcon}
 									width="30"
@@ -89,7 +96,10 @@ export const Home = () => {
 									alt="YTX logo"
 								/>
 							</StyledLink>
-							<StyledLink href="https://ytx.finance/assets/ytx-whitepaper.pdf" target="_blank">
+							<StyledLink
+								href="https://ytx.finance/assets/ytx-whitepaper.pdf"
+								target="_blank"
+							>
 								<img
 									src={WhitepaperIcon}
 									width="30"
@@ -97,7 +107,7 @@ export const Home = () => {
 									className="d-inline-block align-top"
 									alt="YTX logo"
 								/>
-							</StyledLink>						
+							</StyledLink>
 						</LinkWrapper>
 
 						<Form inline>
@@ -191,7 +201,6 @@ const StyledNavbar = styled(Navbar)`
 	padding: 0.5rem 36px !important;
 	height: 71px;
 	opacity: 1;
-
 `
 const StyledNav = styled(Nav)`
 	align-items: center;
@@ -222,10 +231,8 @@ const LinkWrapper = styled.div`
 			margin-right: 1.5rem;
 		}
 	}
-
 `
 const StyledLink = styled(Nav.Link)`
-
 	font: ${(props) =>
 		props.active
 			? 'normal normal bold 16px/19px Montserrat'
@@ -365,9 +372,9 @@ const StyledHeader = styled(Modal.Header)`
 `
 const StyledBody = styled(Modal.Body)`
 	padding-top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
 	h4 {
 		font: normal normal bold 30px/37px Montserrat;
@@ -393,7 +400,7 @@ const StyledBody = styled(Modal.Body)`
 `
 const StakeButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
-	box-shadow: 0px 5px 12px #0000004B;
+	box-shadow: 0px 5px 12px #0000004b;
 	border: none;
 	border-radius: 12px;
 	margin-bottom: 7px;
@@ -402,7 +409,7 @@ const StakeButton = styled(Button)`
 	text-transform: uppercase;
 	font: normal normal bold 11px/14px Montserrat;
 	letter-spacing: 0.55px;
-	color: #3D2206;
+	color: #3d2206;
 
 	&:hover {
 		color: #212529;
@@ -411,10 +418,10 @@ const StakeButton = styled(Button)`
 	}
 `
 const UnstakeButton = styled(StakeButton)`
-	background: #FF8A324B 0% 0% no-repeat padding-box;
-	box-shadow: 0px 5px 12px #0000004B;
+	background: #ff8a324b 0% 0% no-repeat padding-box;
+	box-shadow: 0px 5px 12px #0000004b;
 	font: normal normal bold 10px/12px Montserrat;
 	letter-spacing: 0.55px;
-	border: 1px solid #FF8A32;
+	border: 1px solid #ff8a32;
 	margin-bottom: 19px;
 `
