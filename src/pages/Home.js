@@ -53,7 +53,7 @@ export const Home = () => {
 		<>
 			<StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 				<StyledBrand href="#home">
-					<img
+					<LogoImg
 						src={Logo}
 						width="49"
 						height="49"
@@ -179,8 +179,21 @@ export const Home = () => {
 	)
 }
 
+const LogoImg = styled.img`
+	width: 49px;
+	height: 49px;
+
+	@media ${device.desktop} {
+		width: 100px;
+		height: 100px;
+	}
+
+`
 const StyledBrand = styled(Navbar.Brand)`
 	margin-right: 38px;
+	@media ${device.desktop} {
+		margin-right: 93px;
+	}
 `
 const StyledNavBarCollapse = styled(Navbar.Collapse)`
 	background: #000000;
@@ -201,6 +214,9 @@ const StyledNavbar = styled(Navbar)`
 	padding: 0.5rem 36px !important;
 	height: 71px;
 	opacity: 1;
+	@media ${device.desktop} {
+		height: 137px;
+	}
 `
 const StyledNav = styled(Nav)`
 	align-items: center;
@@ -208,29 +224,28 @@ const StyledNav = styled(Nav)`
 const WalletButton = styled(Button)`
 	color: rgba(255, 255, 255, 0.8);
 	background: #ff8a321a 0% 0% no-repeat padding-box;
+	font: normal normal normal 15px/19px Montserrat;
 	border: 1px solid #ff8a32;
 	border-radius: 9px;
+	width: 177px;
+	height: 39px;
 
 	&:hover {
 		color: #212529;
 		background-color: #ff8a32;
 		border-color: transparent;
 	}
+
+	@media ${device.desktop} {
+		width: 360px;
+		height: 80px;
+		font: normal normal normal 30px/37px Montserrat;
+	}
 `
 const LinkWrapper = styled.div`
 	flex-direction: row;
 	display: flex;
 
-	a {
-		margin: 1.5rem;
-	}
-
-	@media ${device.tablet} {
-		a {
-			margin: unset;
-			margin-right: 1.5rem;
-		}
-	}
 `
 const StyledLink = styled(Nav.Link)`
 	font: ${(props) =>
@@ -245,6 +260,19 @@ const StyledLink = styled(Nav.Link)`
 		margin: unset;
 		margin-right: 1.5rem;
 	}
+
+	@media ${device.desktop} {
+		font: ${(props) =>
+			props.active
+				? 'normal normal bold 31px/38px Montserrat'
+				: 'normal normal normal 31px/38px Montserrat'};
+		margin-right: 3.5rem;
+		img{
+			width: 60px;
+			height: 60px;			
+		}
+	}
+letter-spacing: 0px;
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
@@ -291,6 +319,11 @@ const CardHeader = styled.div`
 	@media ${device.laptop} {
 		margin: 4rem 6rem -1.9rem;
 	}
+
+	@media ${device.desktop} {
+		margin: 4rem 6rem -1.9rem;
+		padding: 33px;
+	}
 `
 const Title = styled.div`
 	display: flex;
@@ -307,11 +340,21 @@ const Title = styled.div`
 	@media ${device.laptop} {
 		font: normal normal bold 24px/29px Montserrat;
 	}
+	@media ${device.desktop} {
+		font: normal normal bold 43px/53px Montserrat;
+		letter-spacing: 8.6px;
+	}
 `
 const Tooltip = styled.img`
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
+	@media ${device.desktop} {
+		right: 2rem;
+		top: 2rem;
+		width: 49px;
+		height: 49px;
+	}
 `
 const StyledCol = styled(Col)`
 	text-align: center;
