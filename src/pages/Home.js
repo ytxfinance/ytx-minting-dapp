@@ -108,12 +108,6 @@ export const Home = () => {
 					</StyledNav>
 				</StyledNavBarCollapse>
 			</StyledNavbar>
-			{/* <Header>
-				<h1 style={{ margin: 'auto 0 auto 50px' }}>YTX Minting</h1>
-				<Button onClick={() => setIsModalOpen(true)} margin="10px 20px">
-					Stake YTX
-				</Button>
-			</Header> */}
 			<StyeldContainer fluid>
 				<CardHeader>
 					<Title>XYZ Collection</Title>
@@ -144,9 +138,7 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={12} md={4} sm={6}>
-									{/* <h2>{card.title}</h2> */}
-									{/* {card.isAvalible && <h3>Avalible</h3>} */}
+								<StyledCol key={i} xs={12} xl={4} md={4} sm={6}>
 									<Card card={card} />
 								</StyledCol>
 							)
@@ -169,28 +161,6 @@ export const Home = () => {
 			>
 				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
 			</StakeModalButton>
-			{/* <div className="cardContainer">
-				{cards.map((card, i) => {
-					return (
-						<div key={i}>
-							<h2>{card.title}</h2>
-							{card.isAvalible && <h3>Avalible</h3>}
-							<Card
-								title={card.title}
-								img={card.img}
-								isAvalible={card.isAvalible}
-							/>
-						</div>
-					)
-				})}
-			</div> */}
-			{/* <Modal modalState={[isModalOpen, setIsModalOpen]}>
-				<h1>Stake YTX</h1>
-				<div>
-					<input style={{ margin: '30px auto' }} />
-					<input type="submit" value="Stake" />
-				</div>
-			</Modal> */}
 			<MyVerticallyCenteredModal
 				show={modalShow}
 				onHide={() => setModalShow(false)}
