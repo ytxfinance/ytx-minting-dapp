@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import ScrollUpButton from 'react-scroll-up-button'
+
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -9,8 +10,11 @@ import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import { Col, Row } from 'react-bootstrap'
+import Modal from 'react-bootstrap/Modal'
+
 import { cardStore, device } from '../store'
-import { Card, Modal, Header } from '../components'
+import { Card, Header } from '../components'
+
 import {
 	Logo,
 	DiscordIcon,
@@ -22,8 +26,28 @@ import {
 
 export const Home = () => {
 	const { cards } = useContext(cardStore)
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [modalShow, setModalShow] = React.useState(false)
 	const placement = 'bottom'
+
+	const MyVerticallyCenteredModal = (props) => {
+		return (
+			<Modal
+				{...props}
+				size="md"
+				aria-labelledby="contained-modal-title-vcenter"
+				centered
+			>
+				<StyledHeader closeButton></StyledHeader>
+				<StyledBody>
+					<h4>Stake YTX</h4>
+					<input type="number" min="1"/>
+					<StakeButton variant="outline-warning">Stake</StakeButton>
+					<UnstakeButton variant="outline-warning">Unstake</UnstakeButton>
+				</StyledBody>
+			</Modal>
+		)
+	}
+
 	return (
 		<>
 			<StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -136,9 +160,12 @@ export const Home = () => {
 					src={ScrollTopIcon}
 				/>
 			</ScrollUpButton>
-			<StakeButton variant="outline-warning">
+			<StakeModalButton
+				variant="outline-warning"
+				onClick={() => setModalShow(true)}
+			>
 				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
-			</StakeButton>
+			</StakeModalButton>
 			{/* <div className="cardContainer">
 				{cards.map((card, i) => {
 					return (
@@ -154,13 +181,17 @@ export const Home = () => {
 					)
 				})}
 			</div> */}
-			<Modal modalState={[isModalOpen, setIsModalOpen]}>
+			{/* <Modal modalState={[isModalOpen, setIsModalOpen]}>
 				<h1>Stake YTX</h1>
 				<div>
 					<input style={{ margin: '30px auto' }} />
 					<input type="submit" value="Stake" />
 				</div>
-			</Modal>
+			</Modal> */}
+			<MyVerticallyCenteredModal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+			/>
 		</>
 	)
 }
@@ -271,14 +302,14 @@ const ScrollTopButton = styled.img`
 	position: fixed;
 	cursor: pointer;
 	bottom: 1rem;
-    left: 1rem;
+	left: 1rem;
 
 	@media ${device.mobileL} {
 		bottom: 4rem;
 		left: 4rem;
 	}
 `
-const StakeButton = styled(Button)`
+const StakeModalButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
 	border: none;
@@ -291,8 +322,8 @@ const StakeButton = styled(Button)`
 	left: 50%;
 	width: 239px;
 	bottom: 2rem;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
 
 	@media ${device.mobileL} {
 		bottom: 4rem;
@@ -312,4 +343,66 @@ const StakeButton = styled(Button)`
 	strong {
 		font: normal normal bold 15px/19px Montserrat;
 	}
+`
+const StyledHeader = styled(Modal.Header)`
+	border-bottom: none;
+
+	.close {
+		outline: none;
+	}
+`
+const StyledBody = styled(Modal.Body)`
+	padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+	h4 {
+		font: normal normal bold 30px/37px Montserrat;
+		letter-spacing: 0px;
+		margin-bottom: 20px;
+		color: #1f1f1f;
+	}
+
+	input {
+		box-shadow: 0px 3px 6px #00000029;
+		border-radius: 8px;
+		text-align: center;
+		padding-right: 7px;
+		margin-bottom: 20px;
+		width: 226px;
+		border: none;
+		height: 39px;
+	}
+
+	input:focus {
+		border: none;
+	}
+`
+const StakeButton = styled(Button)`
+	background: #ff8a32 0% 0% no-repeat padding-box;
+	box-shadow: 0px 5px 12px #0000004B;
+	border: none;
+	border-radius: 12px;
+	margin-bottom: 7px;
+	width: 162px;
+	height: 41px;
+	text-transform: uppercase;
+	font: normal normal bold 11px/14px Montserrat;
+	letter-spacing: 0.55px;
+	color: #3D2206;
+
+	&:hover {
+		color: #212529;
+		background-color: #ff8a32;
+		border-color: transparent;
+	}
+`
+const UnstakeButton = styled(StakeButton)`
+	background: #FF8A324B 0% 0% no-repeat padding-box;
+	box-shadow: 0px 5px 12px #0000004B;
+	font: normal normal bold 10px/12px Montserrat;
+	letter-spacing: 0.55px;
+	border: 1px solid #FF8A32;
+	margin-bottom: 19px;
 `
