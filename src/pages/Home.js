@@ -70,7 +70,7 @@ export const Home = () => {
 						<StyledLink href="#card-game">YTX Card Game</StyledLink>
 					</Nav>
 					<Nav>
-						<StyledLink href="#discord">
+						<StyledLink href="https://discord.gg/pAYrSwR" target="_blank">
 							<img
 								src={DiscordIcon}
 								width="30"
@@ -79,7 +79,7 @@ export const Home = () => {
 								alt="YTX logo"
 							/>
 						</StyledLink>
-						<StyledLink href="#git">
+						<StyledLink href="https://github.com/ytxfinance" target="_blank">
 							<img
 								src={GitHubIcon}
 								width="30"
@@ -88,7 +88,7 @@ export const Home = () => {
 								alt="YTX logo"
 							/>
 						</StyledLink>
-						<StyledLink href="#whitepaper">
+						<StyledLink href="https://ytx.finance/assets/ytx-whitepaper.pdf" target="_blank">
 							<img
 								src={WhitepaperIcon}
 								width="30"
