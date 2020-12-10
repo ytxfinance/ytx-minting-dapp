@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from 'react-bootstrap/Button'
 import LabelBackImg from '../assets/label-back.png'
+
 export const Card = ({ card }) => {
 	const {
 		title,
@@ -12,7 +13,7 @@ export const Card = ({ card }) => {
 		requiredYTX,
 		requiredYFS,
 	} = card
-	
+
 	return (
 		<CardContainer>
 			<CardTitle>{title}</CardTitle>

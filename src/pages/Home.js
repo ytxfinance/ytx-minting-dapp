@@ -148,7 +148,7 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={12} xl={4} md={4} sm={6}>
+								<StyledCol key={i} xs={12} xl={4} md={4} sm={6} className="col-xxl-3">
 									<Card card={card} />
 								</StyledCol>
 							)
@@ -316,6 +316,14 @@ const Tooltip = styled.img`
 const StyledCol = styled(Col)`
 	text-align: center;
 	margin-bottom: 4rem;
+
+	@media ${device.laptopL}  {
+		&.col-xxl-3 {
+			flex: 0 0 25%;
+			max-width: 25%;
+		}
+	}
+	
 `
 const ScrollTopButton = styled.img`
 	position: fixed;
