@@ -242,6 +242,7 @@ const WalletButton = styled(Button)`
 	font: normal normal normal 15px/19px Montserrat;
 	border: 1px solid #ff8a32;
 	border-radius: 9px;
+	box-shadow: none !important;
 	width: 177px;
 	height: 39px;
 
@@ -401,6 +402,9 @@ const StyledCol = styled(Col)`
 const ScrollTopButton = styled.img`
 	position: fixed;
 	cursor: pointer;
+	background: #757575;
+    padding: 2px;
+    border-radius: 50%;
 	bottom: 1rem;
 	left: 1rem;
 	display: none;
@@ -422,8 +426,9 @@ const ScrollTopButton = styled.img`
 const StakeModalButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
-	border: none;
+	border: none !important;
 	border-radius: 12px;
+	box-shadow: none !important;
 	letter-spacing: 0.6px;
 	color: #3d2206;
 	padding: 12px 25px;
@@ -506,6 +511,7 @@ const StakeButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
 	border: none;
+	box-shadow: none !important;
 	border-radius: 12px;
 	margin-bottom: 7px;
 	width: 162px;

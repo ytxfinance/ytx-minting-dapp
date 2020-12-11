@@ -101,6 +101,8 @@ const MintButton = styled(Button)`
 	border-color: transparent;
 	padding: 7px 28px;
 	border-radius: 9px;
+	box-shadow: none !important;
+	text-transform: uppercase;
 	opacity: 1;
 	font: normal normal 500 12px/15px Montserrat;
 	letter-spacing: 0px;
