@@ -114,6 +114,10 @@ const MintButton = styled(Button)`
 		border-color: transparent;
 	}
 
+	&:active {
+		border-color: transparent !important;
+	}
+
 	@media ${device.desktop} {
 		padding: 15px 38px;
 		font: normal normal 500 24px/29px Montserrat;
@@ -137,7 +141,7 @@ const CardImage = styled.img`
 const ButtonGroup = styled.div`
 	width: 187px;
 	text-align: center;
-	margin: 12px auto 13px;
+	margin: 13px auto 12px;
 	height: 26px;
 	z-index: 2;
 	border-radius: 17px;

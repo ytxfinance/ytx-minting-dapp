@@ -217,7 +217,7 @@ const StyledNavBarCollapse = styled(Navbar.Collapse)`
 `
 const StyledNavbar = styled(Navbar)`
 	background: #343434 0% 0% no-repeat padding-box !important;
-	padding: 0.5rem 10px !important;
+	padding: 0.5rem 18px !important;
 	height: 71px;
 	opacity: 1;
 
@@ -242,6 +242,7 @@ const WalletButton = styled(Button)`
 	font: normal normal normal 15px/19px Montserrat;
 	border: 1px solid #ff8a32;
 	border-radius: 9px;
+
 	box-shadow: none !important;
 	width: 177px;
 	height: 39px;
@@ -250,6 +251,10 @@ const WalletButton = styled(Button)`
 		color: #212529;
 		background-color: #ff8a32;
 		border-color: transparent;
+	}
+
+	&:active {
+		border-color: transparent !important;
 	}
 
 	@media ${device.desktop} {
@@ -348,7 +353,7 @@ const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font: normal normal bold 16px/29px Montserrat;
+	font: normal normal bold 16px/19px Montserrat;
 	letter-spacing: 4.8px;
 	color: #ffffff;
 	text-transform: uppercase;
