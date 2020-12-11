@@ -197,11 +197,11 @@ const StyledBrand = styled(Navbar.Brand)`
 `
 const StyledNavBarCollapse = styled(Navbar.Collapse)`
 	background: #000000;
-	opacity: 0.8;
+	opacity: 0.95;
 	text-align: center;
 	z-index: 100;
 	padding: 41% 10%;
-	@media ${device.tablet} {
+	@media ${device.laptop} {
 		background: unset;
 		opacity: 1;
 		text-align: center;
@@ -211,9 +211,12 @@ const StyledNavBarCollapse = styled(Navbar.Collapse)`
 `
 const StyledNavbar = styled(Navbar)`
 	background: #343434 0% 0% no-repeat padding-box !important;
-	padding: 0.5rem 36px !important;
+	padding: 0.5rem 10px !important;
 	height: 71px;
 	opacity: 1;
+	@media ${device.mobileL} {
+		padding: 0.5rem 36px !important;
+	}
 	@media ${device.desktop} {
 		height: 137px;
 	}
@@ -290,6 +293,10 @@ const CardPanel = styled.div`
 	@media ${device.tablet} {
 		padding: 5rem 5rem 2rem;
 	}
+
+	@media ${device.desktop} {
+		padding: 7rem 5rem 2rem;
+	}
 `
 const CardHeader = styled.div`
 	background: #535353 0% 0% no-repeat padding-box;
@@ -349,6 +356,7 @@ const Tooltip = styled.img`
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
+
 	@media ${device.desktop} {
 		right: 2rem;
 		top: 2rem;
@@ -358,7 +366,7 @@ const Tooltip = styled.img`
 `
 const StyledCol = styled(Col)`
 	text-align: center;
-	margin-bottom: 4rem;
+	margin-bottom: 3.3rem;
 
 	@media ${device.laptopXL}  {
 		&.col-xxl-3 {
@@ -366,7 +374,14 @@ const StyledCol = styled(Col)`
 			max-width: 25%;
 		}
 	}
-	
+
+	@media ${device.tablet} {
+		margin-bottom: 4rem;
+	}
+
+	@media ${device.desktop} {
+		margin-bottom: 6rem;
+	}
 `
 const ScrollTopButton = styled.img`
 	position: fixed;
@@ -377,6 +392,11 @@ const ScrollTopButton = styled.img`
 	@media ${device.mobileL} {
 		bottom: 4rem;
 		left: 4rem;
+	}
+
+	@media ${device.desktop} {
+		width: 60px;
+		height: 60px;
 	}
 `
 const StakeModalButton = styled(Button)`
@@ -413,6 +433,20 @@ const StakeModalButton = styled(Button)`
 	strong {
 		font: normal normal bold 15px/19px Montserrat;
 	}
+
+	@media ${device.desktop} {
+		width: 433px;
+		padding: 36px 50px;
+		span {
+			font: normal normal bold 28px/34px Montserrat;
+			letter-spacing: 1.4px
+		}
+		strong {
+			font: normal normal bold 28px/34px Montserrat;
+			letter-spacing: 1.4px
+		}
+	}
+	
 `
 const StyledHeader = styled(Modal.Header)`
 	border-bottom: none;
