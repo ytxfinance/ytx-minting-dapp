@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import LazyLoad from 'react-lazyload';
 import Button from 'react-bootstrap/Button'
 import LabelBackImg from '../assets/label-back.png'
 import { device } from '../store'
@@ -16,10 +17,13 @@ export const Card = ({ card }) => {
 	} = card
 
 	return (
+
 		<CardContainer>
 			<CardTitle>{title}</CardTitle>
 			<ImageWrapper>
-				<CardImage src={img} />
+				<LazyLoad height={312}>
+					<CardImage src={img} />
+				</LazyLoad>
 				<div className="overlay"></div>
 				<div className="button-wrapper">
 					<MintButton variant="outline-warning"> Mint </MintButton>
