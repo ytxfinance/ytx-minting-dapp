@@ -148,7 +148,14 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={12} xl={4} md={6} sm={6} className="col-xxl-3">
+								<StyledCol
+									key={i}
+									xs={12}
+									xl={4}
+									md={6}
+									sm={6}
+									className="col-xxl-3"
+								>
 									<Card card={card} />
 								</StyledCol>
 							)
@@ -187,7 +194,6 @@ const LogoImg = styled.img`
 		width: 100px;
 		height: 100px;
 	}
-
 `
 const StyledBrand = styled(Navbar.Brand)`
 	margin-right: 38px;
@@ -214,6 +220,12 @@ const StyledNavbar = styled(Navbar)`
 	padding: 0.5rem 10px !important;
 	height: 71px;
 	opacity: 1;
+
+	.navbar-toggler {
+		border: none;
+		outline: none;
+	}
+
 	@media ${device.mobileL} {
 		padding: 0.5rem 36px !important;
 	}
@@ -248,7 +260,6 @@ const WalletButton = styled(Button)`
 const LinkWrapper = styled.div`
 	flex-direction: row;
 	display: flex;
-
 `
 const StyledLink = styled(Nav.Link)`
 	font: ${(props) =>
@@ -270,12 +281,12 @@ const StyledLink = styled(Nav.Link)`
 				? 'normal normal bold 31px/38px Montserrat'
 				: 'normal normal normal 31px/38px Montserrat'};
 		margin-right: 3.5rem;
-		img{
+		img {
 			width: 60px;
-			height: 60px;			
+			height: 60px;
 		}
 	}
-letter-spacing: 0px;
+	letter-spacing: 0px;
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
@@ -354,21 +365,25 @@ const Title = styled.div`
 `
 const Tooltip = styled.img`
 	position: absolute;
-	right: 1rem;
-	top: 1rem;
+	right: 1.2rem;
+	top: 1.2rem;
+	background: #a7a7a7 0% 0% no-repeat padding-box;
+	border-radius: 50%;
+	padding: 5px;
 
 	@media ${device.desktop} {
 		right: 2rem;
 		top: 2rem;
 		width: 49px;
 		height: 49px;
+		padding: 10px;
 	}
 `
 const StyledCol = styled(Col)`
 	text-align: center;
 	margin-bottom: 3.3rem;
 
-	@media ${device.laptopXL}  {
+	@media ${device.laptopXL} {
 		&.col-xxl-3 {
 			flex: 0 0 25%;
 			max-width: 25%;
@@ -388,10 +403,15 @@ const ScrollTopButton = styled.img`
 	cursor: pointer;
 	bottom: 1rem;
 	left: 1rem;
+	display: none;
 
 	@media ${device.mobileL} {
 		bottom: 4rem;
 		left: 4rem;
+	}
+
+	@media ${device.tablet} {
+		display: block;
 	}
 
 	@media ${device.desktop} {
@@ -439,14 +459,13 @@ const StakeModalButton = styled(Button)`
 		padding: 36px 50px;
 		span {
 			font: normal normal bold 28px/34px Montserrat;
-			letter-spacing: 1.4px
+			letter-spacing: 1.4px;
 		}
 		strong {
 			font: normal normal bold 28px/34px Montserrat;
-			letter-spacing: 1.4px
+			letter-spacing: 1.4px;
 		}
 	}
-	
 `
 const StyledHeader = styled(Modal.Header)`
 	border-bottom: none;
