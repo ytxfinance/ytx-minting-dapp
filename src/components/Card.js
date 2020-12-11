@@ -21,7 +21,7 @@ export const Card = ({ card }) => {
 		<CardContainer>
 			<CardTitle>{title}</CardTitle>
 			<ImageWrapper>
-				<LazyLoad height={312}>
+				<LazyLoad height={312} offset={100} once>
 					<CardImage src={img} />
 				</LazyLoad>
 				<div className="overlay"></div>
