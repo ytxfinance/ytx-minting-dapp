@@ -43,6 +43,7 @@ module.exports = {
     plugins: [
         new htmlPlugin({
             title: "NFT Minting App",
+            favicon: "./src/assets/favicon.ico",
             template: './src/index.ejs',
             hash: true
         }),
