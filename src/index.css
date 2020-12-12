@@ -12,3 +12,7 @@ body {
 	border-radius: 10px;
 	opacity: 0.95;
 }
+.modal-open {
+    overflow-y: scroll !important;
+    padding-right: 0px !important;
+}
