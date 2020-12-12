@@ -53,7 +53,7 @@ export const Home = () => {
 		<>
 			<StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 				<StyledBrand href="#home">
-					<img
+					<LogoImg
 						src={Logo}
 						width="49"
 						height="49"
@@ -148,7 +148,14 @@ export const Home = () => {
 					<Row>
 						{cards.map((card, i) => {
 							return (
-								<StyledCol key={i} xs={12} xl={4} md={6} sm={6} className="col-xxl-3">
+								<StyledCol
+									key={i}
+									xs={12}
+									xl={4}
+									md={6}
+									sm={6}
+									className="col-xxl-3"
+								>
 									<Card card={card} />
 								</StyledCol>
 							)
@@ -179,16 +186,28 @@ export const Home = () => {
 	)
 }
 
+const LogoImg = styled.img`
+	width: 49px;
+	height: 49px;
+
+	@media ${device.desktop} {
+		width: 100px;
+		height: 100px;
+	}
+`
 const StyledBrand = styled(Navbar.Brand)`
 	margin-right: 38px;
+	@media ${device.desktop} {
+		margin-right: 93px;
+	}
 `
 const StyledNavBarCollapse = styled(Navbar.Collapse)`
 	background: #000000;
-	opacity: 0.8;
+	opacity: 0.95;
 	text-align: center;
 	z-index: 100;
 	padding: 41% 10%;
-	@media ${device.tablet} {
+	@media ${device.laptop} {
 		background: unset;
 		opacity: 1;
 		text-align: center;
@@ -198,9 +217,21 @@ const StyledNavBarCollapse = styled(Navbar.Collapse)`
 `
 const StyledNavbar = styled(Navbar)`
 	background: #343434 0% 0% no-repeat padding-box !important;
-	padding: 0.5rem 36px !important;
+	padding: 0.5rem 18px !important;
 	height: 71px;
 	opacity: 1;
+
+	.navbar-toggler {
+		border: none;
+		outline: none;
+	}
+
+	@media ${device.mobileL} {
+		padding: 0.5rem 36px !important;
+	}
+	@media ${device.desktop} {
+		height: 137px;
+	}
 `
 const StyledNav = styled(Nav)`
 	align-items: center;
@@ -208,29 +239,33 @@ const StyledNav = styled(Nav)`
 const WalletButton = styled(Button)`
 	color: rgba(255, 255, 255, 0.8);
 	background: #ff8a321a 0% 0% no-repeat padding-box;
+	font: normal normal normal 15px/19px Montserrat;
 	border: 1px solid #ff8a32;
 	border-radius: 9px;
+
+	box-shadow: none !important;
+	width: 177px;
+	height: 39px;
 
 	&:hover {
 		color: #212529;
 		background-color: #ff8a32;
 		border-color: transparent;
 	}
+
+	&:active {
+		border-color: transparent !important;
+	}
+
+	@media ${device.desktop} {
+		width: 360px;
+		height: 80px;
+		font: normal normal normal 30px/37px Montserrat;
+	}
 `
 const LinkWrapper = styled.div`
 	flex-direction: row;
 	display: flex;
-
-	a {
-		margin: 1.5rem;
-	}
-
-	@media ${device.tablet} {
-		a {
-			margin: unset;
-			margin-right: 1.5rem;
-		}
-	}
 `
 const StyledLink = styled(Nav.Link)`
 	font: ${(props) =>
@@ -245,6 +280,19 @@ const StyledLink = styled(Nav.Link)`
 		margin: unset;
 		margin-right: 1.5rem;
 	}
+
+	@media ${device.desktop} {
+		font: ${(props) =>
+			props.active
+				? 'normal normal bold 31px/38px Montserrat'
+				: 'normal normal normal 31px/38px Montserrat'};
+		margin-right: 3.5rem;
+		img {
+			width: 60px;
+			height: 60px;
+		}
+	}
+	letter-spacing: 0px;
 `
 const StyeldContainer = styled(Container)`
 	background: #3f3f3f;
@@ -261,6 +309,10 @@ const CardPanel = styled.div`
 
 	@media ${device.tablet} {
 		padding: 5rem 5rem 2rem;
+	}
+
+	@media ${device.desktop} {
+		padding: 7rem 5rem 2rem;
 	}
 `
 const CardHeader = styled.div`
@@ -291,12 +343,17 @@ const CardHeader = styled.div`
 	@media ${device.laptop} {
 		margin: 4rem 6rem -1.9rem;
 	}
+
+	@media ${device.desktop} {
+		margin: 4rem 6rem -1.9rem;
+		padding: 33px;
+	}
 `
 const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font: normal normal bold 16px/29px Montserrat;
+	font: normal normal bold 16px/19px Montserrat;
 	letter-spacing: 4.8px;
 	color: #ffffff;
 	text-transform: uppercase;
@@ -307,40 +364,76 @@ const Title = styled.div`
 	@media ${device.laptop} {
 		font: normal normal bold 24px/29px Montserrat;
 	}
+	@media ${device.desktop} {
+		font: normal normal bold 43px/53px Montserrat;
+		letter-spacing: 8.6px;
+	}
 `
 const Tooltip = styled.img`
 	position: absolute;
-	right: 1rem;
-	top: 1rem;
+	right: 1.2rem;
+	top: 1.2rem;
+	background: #a7a7a7 0% 0% no-repeat padding-box;
+	border-radius: 50%;
+	padding: 5px;
+
+	@media ${device.desktop} {
+		right: 2rem;
+		top: 2rem;
+		width: 49px;
+		height: 49px;
+		padding: 10px;
+	}
 `
 const StyledCol = styled(Col)`
 	text-align: center;
-	margin-bottom: 4rem;
+	margin-bottom: 3.3rem;
 
-	@media ${device.laptopXL}  {
+	@media ${device.laptopXL} {
 		&.col-xxl-3 {
 			flex: 0 0 25%;
 			max-width: 25%;
 		}
 	}
-	
+
+	@media ${device.tablet} {
+		margin-bottom: 4rem;
+	}
+
+	@media ${device.desktop} {
+		margin-bottom: 6rem;
+	}
 `
 const ScrollTopButton = styled.img`
 	position: fixed;
 	cursor: pointer;
+	background: #757575;
+    padding: 2px;
+    border-radius: 50%;
 	bottom: 1rem;
 	left: 1rem;
+	display: none;
 
 	@media ${device.mobileL} {
 		bottom: 4rem;
 		left: 4rem;
 	}
+
+	@media ${device.tablet} {
+		display: block;
+	}
+
+	@media ${device.desktop} {
+		width: 60px;
+		height: 60px;
+	}
 `
 const StakeModalButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
-	border: none;
+	border: none !important;
 	border-radius: 12px;
+	box-shadow: none !important;
 	letter-spacing: 0.6px;
 	color: #3d2206;
 	padding: 12px 25px;
@@ -369,6 +462,19 @@ const StakeModalButton = styled(Button)`
 	}
 	strong {
 		font: normal normal bold 15px/19px Montserrat;
+	}
+
+	@media ${device.desktop} {
+		width: 433px;
+		padding: 36px 50px;
+		span {
+			font: normal normal bold 28px/34px Montserrat;
+			letter-spacing: 1.4px;
+		}
+		strong {
+			font: normal normal bold 28px/34px Montserrat;
+			letter-spacing: 1.4px;
+		}
 	}
 `
 const StyledHeader = styled(Modal.Header)`
@@ -410,6 +516,7 @@ const StakeButton = styled(Button)`
 	background: #ff8a32 0% 0% no-repeat padding-box;
 	box-shadow: 0px 5px 12px #0000004b;
 	border: none;
+	box-shadow: none !important;
 	border-radius: 12px;
 	margin-bottom: 7px;
 	width: 162px;

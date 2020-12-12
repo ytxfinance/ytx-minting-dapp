@@ -42,7 +42,8 @@ module.exports = {
     },
     plugins: [
         new htmlPlugin({
-            title: "Decentralized card game",
+            title: "NFT Minting App",
+            favicon: "./src/assets/favicon.ico",
             template: './src/index.ejs',
             hash: true
         }),

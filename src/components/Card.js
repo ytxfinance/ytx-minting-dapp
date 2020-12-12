@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import LazyLoad from 'react-lazyload';
 import Button from 'react-bootstrap/Button'
 import LabelBackImg from '../assets/label-back.png'
+import { device } from '../store'
 
 export const Card = ({ card }) => {
 	const {
@@ -15,10 +17,13 @@ export const Card = ({ card }) => {
 	} = card
 
 	return (
+
 		<CardContainer>
 			<CardTitle>{title}</CardTitle>
 			<ImageWrapper>
-				<CardImage src={img} />
+				<LazyLoad height={312} offset={100} once>
+					<CardImage src={img} />
+				</LazyLoad>
 				<div className="overlay"></div>
 				<div className="button-wrapper">
 					<MintButton variant="outline-warning"> Mint </MintButton>
@@ -49,12 +54,22 @@ const CardTitle = styled.div`
 	letter-spacing: 0px;
 	color: #ffffff;
 	margin-bottom: 20px;
+
+	@media ${device.desktop} {
+		font: normal normal 500 29px/35px Montserrat;
+	}
+
 `
 const ImageWrapper = styled.div`
 	position: relative;
 	width: 187px;
 	height: 312px;
 	margin: 0 auto;
+
+	@media ${device.desktop} {
+		width: 349px;
+		height: 582px;
+	}
 
 	.overlay {
 		position: absolute;
@@ -90,6 +105,8 @@ const MintButton = styled(Button)`
 	border-color: transparent;
 	padding: 7px 28px;
 	border-radius: 9px;
+	box-shadow: none !important;
+	text-transform: uppercase;
 	opacity: 1;
 	font: normal normal 500 12px/15px Montserrat;
 	letter-spacing: 0px;
@@ -100,6 +117,16 @@ const MintButton = styled(Button)`
 		background-color: #ff8a32;
 		border-color: transparent;
 	}
+
+	&:active {
+		border-color: transparent !important;
+	}
+
+	@media ${device.desktop} {
+		padding: 15px 38px;
+		font: normal normal 500 24px/29px Montserrat;
+		border-radius: 15px;
+	}
 `
 const CardImage = styled.img`
 	width: 187px;
@@ -109,50 +136,102 @@ const CardImage = styled.img`
 	top: 0px;
 	border-radius: 6px;
 	z-index: 0;
+	
+	@media ${device.desktop} {
+		width: 349px;
+		height: 582px;
+	}
 `
 const ButtonGroup = styled.div`
 	width: 187px;
 	text-align: center;
-	margin: 12px auto 13px;
+	margin: 13px auto 12px;
 	height: 26px;
 	z-index: 2;
 	border-radius: 17px;
 	background: linear-gradient(114deg, #ffffff 53%, #ff8a32 47%);
+	
+	@media ${device.desktop} {
+		width: 349px;
+		height: 50px;
+		margin: 23px auto 17px;
+	}
 `
 const MintedText = styled.span`
 	float: left;
 	margin-left: 15px;
+
 	strong {
 		font: normal normal bold 11px/13px Montserrat;
 		letter-spacing: 1.1px;
 	}
+
 	span {
 		font: normal normal normal 10px/13px Montserrat;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+	}
+	
+	@media ${device.desktop} {
+		margin-left: 28px;
+		margin-top: 13px;
+		
+		strong {
+			font: normal normal bold 20px/22px Montserrat;
+			letter-spacing: 2px;
+		}
+
+		span {
+			font: normal normal normal 18px/22px Montserrat;
+			letter-spacing: 1.8px;
+		}
 	}
 `
 const LeftText = styled.span`
 	float: right;
 	margin-right: 15px;
+	color: #FFFFFF;
+
 	strong {
 		font: normal normal bold 11px/13px Montserrat;
 		letter-spacing: 1.1px;
 	}
+
 	span {
 		font: normal normal normal 10px/13px Montserrat;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+	}
+
+	@media ${device.desktop} {
+		margin-right: 28px;
+    	margin-top: 13px;
+		strong {
+			font: normal normal bold 20px/22px Montserrat;
+			letter-spacing: 2px;
+		}
+		span {
+			font: normal normal normal 18px/22px Montserrat;
+			letter-spacing: 1.8px;
+		}
 	}
 `
 const CardText = styled.div`
 	font: normal normal bold 14px/15px Montserrat;
 	letter-spacing: 0px;
 	color: #ffffff;
+
+	@media ${device.desktop} {
+		font: normal normal bold 27px/28px Montserrat;
+	}
 `
 const Subtitle = styled.div`
 	text-align: center;
 	font: normal normal 500 12px/15px Montserrat;
 	letter-spacing: 0px;
 	color: #ffffff;
+
+	@media ${device.desktop} {
+		font: normal normal 500 23px/28px Montserrat;
+	}
 `
