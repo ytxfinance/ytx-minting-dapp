@@ -13,12 +13,7 @@ import twelve from '../assets/cards/twelve.png'
 import tt from '../assets/cards/tt.png'
 import zz from '../assets/cards/zz.png'
 
-export const ACTION_TYPES = {
-	INITIALIZE_CARDS: 'INITIALIZE_CARDS',
-	UPDATE_CARDS: 'UPDATE_CARDS',
-}
-
-export const sampleCardStore = [
+export const initialCards = [
 	{
 		isAvalible: true,
 		title: 'one',

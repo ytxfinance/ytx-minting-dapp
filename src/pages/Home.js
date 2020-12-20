@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import styled from 'styled-components'
 import ScrollUpButton from 'react-scroll-up-button'
-
+import BigNumber from 'bignumber.js'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -11,8 +11,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import { Col, Row } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
-
-import { cardStore, device } from '../store'
+import { store, device } from '../store'
 import { Card } from '../components'
 import {
 	Logo,
@@ -24,9 +23,34 @@ import {
 } from '../components/Icons'
 
 export const Home = () => {
-	const { cards } = useContext(cardStore)
-	const [modalShow, setModalShow] = React.useState(false)
+	const { state } = useContext(store)
+	const [modalShow, setModalShow] = useState(false)
 	const placement = 'bottom'
+	const amountRef = useRef(0)
+
+	const stakeYTX = async () => {
+		const amountToStake = amountRef.current.value
+		const stake = BigNumber(window.web3.utils.toWei(amountToStake))
+		const currentAllowance = await state.ytx.methods.allowance(window.web3.eth.defaultAccount, state.nftManager._address).call()
+		const myBalance = await state.ytx.methods.balanceOf(window.web3.eth.defaultAccount).call()
+
+		if (myBalance < stake) {
+			return alert("You don't have enough tokens to stake")
+		}
+
+		console.log('myBalance', myBalance)
+		console.log('currentAllowance', currentAllowance)
+		console.log('stake', stake)
+
+		if (BigNumber(currentAllowance).isLessThan(stake)) {
+			await state.ytx.methods.approve(state.nftManager._address, stake).send({
+				from: window.web3.eth.defaultAccount,
+			})
+		}
+		await state.nftManager.methods.stakeYTX(stake).send({
+			from: window.web3.eth.defaultAccount,
+		})
+	}
 
 	const MyVerticallyCenteredModal = (props) => {
 		return (
@@ -39,8 +63,11 @@ export const Home = () => {
 				<StyledHeader closeButton></StyledHeader>
 				<StyledBody>
 					<h4>Stake YTX</h4>
-					<input type="number" min="1" />
-					<StakeButton variant="outline-warning">Stake</StakeButton>
+					<input type="number" placeholder="Amount to stake..." ref={amountRef} />
+					<StakeButton
+						variant="outline-warning"
+						onClick={() => stakeYTX()}
+					>Stake</StakeButton>
 					<UnstakeButton variant="outline-warning">
 						Unstake
 					</UnstakeButton>
@@ -146,7 +173,7 @@ export const Home = () => {
 				</CardHeader>
 				<CardPanel>
 					<Row>
-						{cards.map((card, i) => {
+						{state.cards.map((card, i) => {
 							return (
 								<StyledCol
 									key={i}
