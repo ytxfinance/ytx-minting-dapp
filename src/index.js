@@ -8,9 +8,12 @@ import { store, StoreProvider } from './store'
 import config from './config'
 
 const App = () => {
-	const { dispatch } = useContext(store)
+	const { state, dispatch } = useContext(store)
 
 	useEffect(() => setup(), [])
+	useEffect(() => {
+		if (state.ytx) getCards()
+	}, [state.ytx])
 
 	const setup = async () => {
 		// Create the contract instance
@@ -60,6 +63,31 @@ const App = () => {
 				nftManager,
 			},
 		})
+	}
+
+	const getCards = async () => {
+		const baseURI = await state.nftManager.methods.baseURI().call()
+		const uris = await state.nftManager.methods.getTokenURIs().call()
+		// Waits for all promises to finish
+		let combined = await Promise.all(uris.map(async (uri, i) => {
+			const blueprint = await state.nftManager.methods.getBlueprint(uri).call()
+			const req = await fetch(baseURI + uri)
+			const res = await req.json()
+			// console.log('Response', res)
+			return {
+				attributes: res.attributes,
+				description: res.description,
+				image: res.image,
+				name: res.name,
+				mintMax: blueprint[0],
+				currentMint: blueprint[1],
+				ytxCost: blueprint[2],
+				yfsCost: blueprint[3],
+			}
+		}))
+		console.log('combined', combined)
+		console.log('combined', combined)
+		console.log('combined', combined)
 	}
 
 	const getAccount = () => {
