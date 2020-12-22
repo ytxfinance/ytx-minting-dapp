@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import ScrollUpButton from 'react-scroll-up-button'
 import BigNumber from 'bignumber.js'
@@ -23,25 +23,72 @@ import {
 } from '../components/Icons'
 
 export const Home = () => {
-	const { state } = useContext(store)
+	const { state, dispatch } = useContext(store)
 	const [modalShow, setModalShow] = useState(false)
+	const [processingStake, setProcessingStake] = useState(false)
+	const [stakeValue, setStakeValue] = useState(0)
 	const placement = 'bottom'
-	const amountRef = useRef(0)
+
+	useEffect(() => {
+		if (state.setupComplete) {
+			getBalances()
+		}
+	}, [state.setupComplete])
+
+	const getBalances = () => {
+		getCurrentStake()
+		getYTXBalance()
+		getYFSBalance()
+	}
+
+	const getCurrentStake = async () => {
+		const amountStaked = Number(window.web3.utils.fromWei(
+			await state.nftManager.methods.amountStaked(window.web3.eth.defaultAccount).call()
+		)).toFixed(2)
+		console.log('amountStaked', amountStaked)
+		dispatch({
+			type: 'SET_AMOUNT_STAKED',
+			payload: {
+				amountStaked,
+			},
+		})
+	}
+
+	const getYTXBalance = async () => {
+		const ytxBalance = Number(window.web3.utils.fromWei(
+			await state.ytx.methods.balanceOf(window.web3.eth.defaultAccount).call()
+		)).toFixed(2)
+		console.log('ytxBalance', ytxBalance)
+		dispatch({
+			type: 'SET_YTX_BALANCE',
+			payload: {
+				ytxBalance,
+			},
+		})
+	}
+
+	const getYFSBalance = async () => {
+		const yfsBalance = Number(window.web3.utils.fromWei(
+			await state.nftManager.methods.getGeneratedYFS().call()
+		)).toFixed(2)
+		console.log('yfsBalance', yfsBalance)
+		dispatch({
+			type: 'SET_YFS_BALANCE',
+			payload: {
+				yfsBalance,
+			},
+		})
+	}
 
 	const stakeYTX = async () => {
-		const amountToStake = amountRef.current.value
+		setProcessingStake(true)
+		const amountToStake = stakeValue
 		const stake = BigNumber(window.web3.utils.toWei(amountToStake))
 		const currentAllowance = await state.ytx.methods.allowance(window.web3.eth.defaultAccount, state.nftManager._address).call()
 		const myBalance = await state.ytx.methods.balanceOf(window.web3.eth.defaultAccount).call()
-
 		if (myBalance < stake) {
 			return alert("You don't have enough tokens to stake")
 		}
-
-		console.log('myBalance', myBalance)
-		console.log('currentAllowance', currentAllowance)
-		console.log('stake', stake)
-
 		if (BigNumber(currentAllowance).isLessThan(stake)) {
 			await state.ytx.methods.approve(state.nftManager._address, stake).send({
 				from: window.web3.eth.defaultAccount,
@@ -50,30 +97,9 @@ export const Home = () => {
 		await state.nftManager.methods.stakeYTX(stake).send({
 			from: window.web3.eth.defaultAccount,
 		})
-	}
-
-	const MyVerticallyCenteredModal = (props) => {
-		return (
-			<Modal
-				{...props}
-				size="md"
-				aria-labelledby="contained-modal-title-vcenter"
-				centered
-			>
-				<StyledHeader closeButton></StyledHeader>
-				<StyledBody>
-					<h4>Stake YTX</h4>
-					<input type="number" placeholder="Amount to stake..." ref={amountRef} />
-					<StakeButton
-						variant="outline-warning"
-						onClick={() => stakeYTX()}
-					>Stake</StakeButton>
-					<UnstakeButton variant="outline-warning">
-						Unstake
-					</UnstakeButton>
-				</StyledBody>
-			</Modal>
-		)
+		getBalances()
+		setModalShow(false)
+		setProcessingStake(false)
 	}
 
 	return (
@@ -99,6 +125,34 @@ export const Home = () => {
 					</StyledNav>
 					<StyledNav>
 						<LinkWrapper>
+							<StyledBalance>
+								<StyledBalanceDiv>
+									<b>{ state.ytxBalance }</b>
+									&nbsp;
+									<SmallLogoImg
+										src={Logo}
+										className="d-inline-block align-top"
+										alt="YTX logo"
+									/>
+									&nbsp;
+									&nbsp;
+									Balance
+								</StyledBalanceDiv>
+
+								<StyledBalanceDiv>
+									<b>{ state.amountStaked }</b>
+									&nbsp;
+									&nbsp;
+									<SmallLogoImg
+										src={Logo}
+										className="d-inline-block align-top"
+										alt="YTX logo"
+									/>
+									&nbsp;
+									Staked
+								</StyledBalanceDiv>
+							</StyledBalance>
+
 							<StyledLink
 								href="https://discord.gg/pAYrSwR"
 								target="_blank"
@@ -137,11 +191,11 @@ export const Home = () => {
 							</StyledLink>
 						</LinkWrapper>
 
-						<Form inline>
+						{/* <Form inline>
 							<WalletButton variant="outline-warning">
 								Connect Wallet
 							</WalletButton>
-						</Form>
+						</Form> */}
 					</StyledNav>
 				</StyledNavBarCollapse>
 			</StyledNavbar>
@@ -205,14 +259,60 @@ export const Home = () => {
 			>
 				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
 			</StakeModalButton>
-			<MyVerticallyCenteredModal
+			
+			
+			<Modal
 				show={modalShow}
-				onHide={() => setModalShow(false)}
-			/>
+				size="md"
+				aria-labelledby="contained-modal-title-vcenter"
+				centered
+			>
+				<StyledHeader closeButton></StyledHeader>
+				<StyledBody>
+					<h4>Stake YTX</h4>
+					<input type="number" placeholder="Amount to stake..." onInput={e => {
+						setStakeValue(e.target.value)
+					}}/>
+					{stakeValue <= 0 ? null : (
+						<StyledStakeNote>
+							There's a 1% fee on every transaction so your stake will be <b>{stakeValue * 99 / 100} YTX</b> instead of {stakeValue} YTX
+						</StyledStakeNote>
+					)}
+					{processingStake ? (
+						<div>Waiting for transaction confirmation...</div>
+					) : (
+						<>
+							<StakeButton
+								variant="outline-warning"
+								onClick={() => stakeYTX()}
+							>Stake</StakeButton>
+							<UnstakeButton variant="outline-warning">
+								Unstake
+							</UnstakeButton>
+						</>
+					)}
+				</StyledBody>
+			</Modal>
 		</>
 	)
 }
 
+const StyledStakeNote = styled.div`
+	text-align: center;
+	margin-bottom: 10px;
+`
+const StyledBalance = styled.div`
+	color: white;
+	display: flex;
+    justify-content: right;
+    align-items: center;
+	margin-right: 10px;
+	flex-direction: column;
+`
+const StyledBalanceDiv = styled.div`
+	display: flex;
+	align-items: center;
+`
 const LogoImg = styled.img`
 	width: 49px;
 	height: 49px;
@@ -221,6 +321,10 @@ const LogoImg = styled.img`
 		width: 100px;
 		height: 100px;
 	}
+`
+const SmallLogoImg = styled.img`
+	width: 17px;
+	height: 17px;
 `
 const StyledBrand = styled(Navbar.Brand)`
 	margin-right: 38px;

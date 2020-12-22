@@ -1,8 +1,9 @@
 // TODO replace this for the mainnet addresses these are ropsten contracts
 export default {
-	ytxAddress: '0x5E367E048090615DC53c1606D4C3Ad737B3493A5',
-	yfsAddress: '0xa08cb85809E330028418b6fdf97c44f9C6460Fbe',
-	nftManager: '0xb5964EdBcFCA03F84a7Cf0c0Da1E3Cdc4b083A70',
+	ytxAddress: '0x3F9857893C9A3ba9EAF5520A58356808d8DABeBD',
+	yfsAddress: '0x256c756c25727D607A52E063416fF4a096429efE',
+	nftManager: '0xa4Ba36F6c177D92fe51EfA2d49f7F4fCF37E5127',
+	lockLiquidity: '0x44B81738209Fe8C77AD3Facae28d8DfC5B3bE6C4',
 	ytxAbi: [
 		{
 			anonymous: false,
@@ -1835,6 +1836,20 @@ export default {
 			outputs: [],
 			stateMutability: 'nonpayable',
 			type: 'function',
+		},
+		{
+			inputs: [],
+			name: 'getGeneratedYFS',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256',
+				},
+			],
+			stateMutability: 'view',
+			type: 'function',
+			constant: true,
 		},
 		{
 			inputs: [

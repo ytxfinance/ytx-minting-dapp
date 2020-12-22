@@ -23,12 +23,17 @@ const App = () => {
 				alert('You must approve this dApp to interact with it')
 			}
 			window.web3.eth.defaultAccount = accs[0]
-
 			await setupContracts(
 				config.ytxAddress,
 				config.yfsAddress,
 				config.nftManager,
 			)
+			dispatch({
+				type: 'SET_SETUP_COMPLETE',
+				payload: {
+					setupComplete: true,
+				}
+			})
 		} else {
 			alert('You must have metamask installed to use this dApp')
 		}
