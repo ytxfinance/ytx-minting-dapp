@@ -227,20 +227,18 @@ export const Home = () => {
 				</CardHeader>
 				<CardPanel>
 					<Row>
-						{state.cards.map((card, i) => {
-							return (
-								<StyledCol
-									key={i}
-									xs={12}
-									xl={4}
-									md={6}
-									sm={6}
-									className="col-xxl-3"
-								>
-									<Card card={card} />
-								</StyledCol>
-							)
-						})}
+						{state.cards.map((card, i) => (
+							<StyledCol
+								key={i}
+								xs={12}
+								xl={4}
+								md={6}
+								sm={6}
+								className="col-xxl-3"
+							>
+								<Card card={card} />
+							</StyledCol>
+						))}
 					</Row>
 				</CardPanel>
 			</StyeldContainer>

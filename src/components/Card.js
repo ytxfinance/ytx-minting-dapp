@@ -11,7 +11,7 @@ export const Card = ({ card }) => {
 		img,
 		isAvalible,
 		minted,
-		left,
+		total,
 		requiredYTX,
 		requiredYFS,
 	} = card
@@ -35,8 +35,8 @@ export const Card = ({ card }) => {
 					<span>minted</span>
 				</MintedText>
 				<LeftText>
-					<strong>{left} </strong>
-					<span>left</span>
+					<strong>{total} </strong>
+					<span>total</span>
 				</LeftText>
 			</ButtonGroup>
 			<CardText>
@@ -143,7 +143,7 @@ const CardImage = styled.img`
 	}
 `
 const ButtonGroup = styled.div`
-	width: 187px;
+	width: 230px;
 	text-align: center;
 	margin: 13px auto 12px;
 	height: 26px;

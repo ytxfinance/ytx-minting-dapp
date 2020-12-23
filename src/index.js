@@ -31,6 +31,9 @@ const App = () => {
 				config.yfsAddress,
 				config.nftManager,
 			)
+			ethereum.on('accountsChanged', () => {
+				window.location.reload()
+			})
 			dispatch({
 				type: 'SET_SETUP_COMPLETE',
 				payload: {
@@ -73,27 +76,24 @@ const App = () => {
 			const blueprint = await state.nftManager.methods.getBlueprint(uri).call()
 			const req = await fetch(baseURI + uri)
 			const res = await req.json()
-			// console.log('Response', res)
 			return {
 				attributes: res.attributes,
 				description: res.description,
-				image: res.image,
-				name: res.name,
-				mintMax: blueprint[0],
-				currentMint: blueprint[1],
-				ytxCost: blueprint[2],
-				yfsCost: blueprint[3],
+				img: res.image,
+				title: res.name,
+				total: blueprint[0],
+				// mintMax - currentMint
+				minted: blueprint[0] - blueprint[1],
+				requiredYTX: window.web3.utils.fromWei(blueprint[2]),
+				requiredYFS: window.web3.utils.fromWei(blueprint[3]),
+				isAvailable: blueprint[0] != blueprint[1],
 			}
 		}))
-		console.log('combined', combined)
-		console.log('combined', combined)
-		console.log('combined', combined)
-	}
-
-	const getAccount = () => {
-		return new Promise(async (resolve) => {
-			const accs = await window.web3.eth.getAccounts()
-			resolve(accs[0])
+		dispatch({
+			type: 'SET_CARDS',
+			payload: {
+				cards: combined,
+			},
 		})
 	}
 
