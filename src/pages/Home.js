@@ -42,9 +42,8 @@ export const Home = () => {
 	}
 
 	const getCurrentStake = async () => {
-		const amountStaked = Number(window.web3.utils.fromWei(
-			await state.nftManager.methods.amountStaked(window.web3.eth.defaultAccount).call()
-		)).toFixed(2)
+		const stakes = await state.nftManager.methods.amountStaked(window.web3.eth.defaultAccount).call()
+		const amountStaked = Number(window.web3.utils.fromWei(stakes)).toFixed(2)
 		console.log('amountStaked', amountStaked)
 		dispatch({
 			type: 'SET_AMOUNT_STAKED',
@@ -102,6 +101,54 @@ export const Home = () => {
 		setProcessingStake(false)
 	}
 
+	const mintCard = async card => {
+		alert('Mint card')
+		const ytxPrice = window.web3.utils.toWei(card.requiredYTX)
+		const yfsPrice = window.web3.utils.toWei(card.requiredYFS)
+		// Approve YTX
+		const currentAllowance = await state.ytx.methods.allowance(window.web3.eth.defaultAccount, state.nftManager._address).call()
+		const myBalance = await state.ytx.methods.balanceOf(window.web3.eth.defaultAccount).call()
+		if (myBalance < ytxPrice) {
+			return alert("You don't have enough YTX tokens to purchase this card")
+		}
+		if (BigNumber(currentAllowance).isLessThan(ytxPrice)) {
+			await state.ytx.methods.approve(state.nftManager._address, ytxPrice).send({
+				from: window.web3.eth.defaultAccount,
+			})
+		}
+		// Approve YFS
+		const currentYFSAllowance = await state.yfs.methods.allowance(window.web3.eth.defaultAccount, state.nftManager._address).call()
+		const myYFSBalance = await state.yfs.methods.balanceOf(window.web3.eth.defaultAccount).call()
+		if (myYFSBalance < yfsPrice) {
+			return alert("You don't have enough YFS tokens to purchase this card")
+		}
+		if (BigNumber(currentYFSAllowance).isLessThan(yfsPrice)) {
+			await state.yfs.methods.approve(state.nftManager._address, yfsPrice).send({
+				from: window.web3.eth.defaultAccount,
+			})
+		}
+		// Mint the card
+		await state.nftManager.safeMint(card.tokenURI).send({
+			from: window.web3.eth.defaultAccount,
+		})
+	}
+
+	const getGeneratedYFS = async () => {
+		const generatedYFS = await state.nftManager.methods.getGeneratedYFS().call()
+		return generatedYFS
+	}
+
+	const receiveYFS = async () => {
+		const generatedYFS = getGeneratedYFS()
+		if (generatedYFS <= 0) {
+			return alert('No YFS generated to receive yet make sure to stake some YTX to generate YFS tokens')
+		}
+		await state.nftManager.methods.receiveYFS().send({
+			from: window.web3.eth.defaultAccount,
+		})
+		console.log('generatedYFS', generatedYFS)
+	}
+
 	return (
 		<>
 			<StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -125,34 +172,6 @@ export const Home = () => {
 					</StyledNav>
 					<StyledNav>
 						<LinkWrapper>
-							<StyledBalance>
-								<StyledBalanceDiv>
-									<b>{ state.ytxBalance }</b>
-									&nbsp;
-									<SmallLogoImg
-										src={Logo}
-										className="d-inline-block align-top"
-										alt="YTX logo"
-									/>
-									&nbsp;
-									&nbsp;
-									Balance
-								</StyledBalanceDiv>
-
-								<StyledBalanceDiv>
-									<b>{ state.amountStaked }</b>
-									&nbsp;
-									&nbsp;
-									<SmallLogoImg
-										src={Logo}
-										className="d-inline-block align-top"
-										alt="YTX logo"
-									/>
-									&nbsp;
-									Staked
-								</StyledBalanceDiv>
-							</StyledBalance>
-
 							<StyledLink
 								href="https://discord.gg/pAYrSwR"
 								target="_blank"
@@ -201,7 +220,8 @@ export const Home = () => {
 			</StyledNavbar>
 			<StyeldContainer fluid>
 				<CardHeader>
-					<Title>XYZ Collection</Title>
+					<Title>YTX Collection</Title>
+
 					<OverlayTrigger
 						trigger={['hover', 'focus']}
 						key={placement}
@@ -226,6 +246,54 @@ export const Home = () => {
 					</OverlayTrigger>
 				</CardHeader>
 				<CardPanel>
+					<ActionButtonsSection>
+						<GetYFSButton
+							onClick={() => receiveYFS()}
+						>
+							Receive YFS
+						</GetYFSButton>
+						<GetYFSButton
+							variant="outline-warning"
+							onClick={() => setModalShow(true)}
+						>
+							<span>Stake/UNSTAKE</span> <strong>YTX</strong>
+						</GetYFSButton>
+
+						<StyledBalance>
+							<StyledBalanceDiv>
+								<b>{ state.ytxBalance }</b>
+								&nbsp;
+								&nbsp;
+								<SmallLogoImg
+									src={Logo}
+									className="d-inline-block align-top"
+									alt="YTX logo"
+								/>
+								&nbsp;
+								Balance
+							</StyledBalanceDiv>
+
+							<StyledBalanceDiv>
+								<b>{ state.yfsBalance }</b>
+								&nbsp;
+								YFS
+								Balance
+							</StyledBalanceDiv>
+
+							<StyledBalanceDiv>
+								<b>{ state.amountStaked }</b>
+								&nbsp;
+								&nbsp;
+								<SmallLogoImg
+									src={Logo}
+									className="d-inline-block align-top"
+									alt="YTX logo"
+								/>
+								&nbsp;
+								Staked
+							</StyledBalanceDiv>
+						</StyledBalance>
+					</ActionButtonsSection>
 					<Row>
 						{state.cards.map((card, i) => (
 							<StyledCol
@@ -236,7 +304,10 @@ export const Home = () => {
 								sm={6}
 								className="col-xxl-3"
 							>
-								<Card card={card} />
+								<Card 
+									card={card}
+									mintCard={() => mintCard(card)}
+								/>
 							</StyledCol>
 						))}
 					</Row>
@@ -251,19 +322,13 @@ export const Home = () => {
 					src={ScrollTopIcon}
 				/>
 			</ScrollUpButton>
-			<StakeModalButton
-				variant="outline-warning"
-				onClick={() => setModalShow(true)}
-			>
-				<span>Stake/UNSTAKE</span> <strong>YTX</strong>
-			</StakeModalButton>
-			
 			
 			<Modal
 				show={modalShow}
 				size="md"
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
+				onHide={() => setModalShow(false)}
 			>
 				<StyledHeader closeButton></StyledHeader>
 				<StyledBody>
@@ -295,6 +360,50 @@ export const Home = () => {
 	)
 }
 
+const ActionButtonsSection = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 50px;
+	width: 550px;
+	flex-direction: row;
+
+	@media (max-width: 830px) {
+		flex-direction: column;
+		width: 100%;
+	}
+`
+const GetYFSButton = styled(Button)`
+	background: #ff8a32 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 12px #00000069;
+	border-color: transparent;
+	padding: 7px 28px;
+	border-radius: 9px;
+	box-shadow: none !important;
+	text-transform: uppercase;
+	opacity: 1;
+	font: normal normal 500 12px/15px Montserrat;
+	letter-spacing: 0px;
+	color: #000000;
+	margin: auto;
+
+	&:hover {
+		color: #212529;
+		background-color: #ff8a32;
+		border-color: transparent;
+	}
+
+	&:active {
+		border-color: transparent !important;
+	}
+
+	@media ${device.desktop} {
+		padding: 15px 38px;
+		font: normal normal 500 24px/29px Montserrat;
+		border-radius: 15px;
+	}
+`
 const StyledStakeNote = styled.div`
 	text-align: center;
 	margin-bottom: 10px;

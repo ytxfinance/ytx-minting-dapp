@@ -1,9 +1,9 @@
 // TODO replace this for the mainnet addresses these are ropsten contracts
 export default {
-	ytxAddress: '0xC6Ed8918b77968E0d7B453Dd36225887CdfD251B',
-	yfsAddress: '0xf5Bf0F19a21B2dEC10fA9b063B843ECA96880EeA',
-	nftManager: '0xBa6CdE59d321233209a4F124Ca54Fc748F142c13',
-	lockLiquidity: '0x8DDc98cA5C03aCE04A1B163025B20F5DFD5adfA4',
+	ytxAddress: '0x1465113223c8f2FFf67dE3fb84C29Cc1044B1fCE',
+	yfsAddress: '0xDf5D1128014b4f09C25370caA785a244c2564619',
+	nftManager: '0x8c4B2F3Fd8f8A454370A07b67837E834a113bC7c',
+	lockLiquidity: '0x25b1340c589C944dF6aF854406835ae4EBf88B77',
 	ytxAbi: [
 		{
 			anonymous: false,

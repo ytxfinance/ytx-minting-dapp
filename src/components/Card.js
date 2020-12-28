@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import LabelBackImg from '../assets/label-back.png'
 import { device } from '../store'
 
-export const Card = ({ card }) => {
+export const Card = ({ card, mintCard }) => {
 	const {
 		title,
 		img,
@@ -26,7 +26,10 @@ export const Card = ({ card }) => {
 				</LazyLoad>
 				<div className="overlay"></div>
 				<div className="button-wrapper">
-					<MintButton variant="outline-warning"> Mint </MintButton>
+					<MintButton 
+						variant="outline-warning"
+						onClick={() => mintCard()}
+					> Mint</MintButton>
 				</div>
 			</ImageWrapper>
 			<ButtonGroup>

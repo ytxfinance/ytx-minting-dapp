@@ -26,6 +26,12 @@ const App = () => {
 				alert('You must approve this dApp to interact with it')
 			}
 			window.web3.eth.defaultAccount = accs[0]
+
+			// TODO remove this in the final dapp when using mainnet
+			if (Number(window.ethereum.networkVersion) != 3) {
+				return alert('You must be connected to the Ropsten network to use this dapp')
+			}
+
 			await setupContracts(
 				config.ytxAddress,
 				config.yfsAddress,
@@ -77,6 +83,7 @@ const App = () => {
 			const req = await fetch(baseURI + uri)
 			const res = await req.json()
 			return {
+				tokenURI: uri,
 				attributes: res.attributes,
 				description: res.description,
 				img: res.image,
